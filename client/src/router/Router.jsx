@@ -13,7 +13,7 @@ import AdminDashboardHome from "../pages/dashboard/admin/adminDashboardHome/Admi
 import SellerDashboardHome from "../pages/dashboard/seller/SellerDashboardHome";
 import UserDashboard from "../layouts/user/UserDashboard";
 import UserDashboardHome from "../pages/dashboard/user/userProfile/UserDashboardHome";
-import SellerDashboard from "../layouts/seller/sellerDashboard";
+// import SellerDashboard from "../layouts/seller/sellerDashboard";
 import AddToy from "../pages/dashboard/seller/addToy/AddToy";
 import ManageToy from "../pages/dashboard/seller/manageToy/ManageToy";
 import Carts from "../pages/dashboard/user/userProfile/Carts";
@@ -21,6 +21,7 @@ import UpdateToy from "../pages/dashboard/seller/updateToy/UpdateToy";
 import Checkout from "../pages/dashboard/user/checkout/Checkout";
 import UserCart from "../pages/dashboard/user/UserCart";
 import UserProfile from "../pages/dashboard/user/userProfile/UserProfile";
+import SellerDashboard from "../layouts/seller/SellerDashboard";
 
 export const router = createBrowserRouter([
   {
