@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer components {
+
+    .btn1 {
+        @apply bg-[#f0c507] py-1 md:px-4 md:py-2 rounded text-black text-xs md:text-[14px] inline-block uppercase hover:bg-[#fc82bd] hover:text-white transition-all duration-500;
+    }
+
+    .btn2 {
+        @apply rounded-full p-1 flex items-center justify-center bg-white border border-blue-gray-100 mb-1 hover:bg-pink-300 hover:text-white transition-all duration-500;
+    }
+
+    .btn3 {
+        @apply absolute w-full h-full flex flex-col justify-between -bottom-10 bg-blue-gray-400 bg-opacity-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300;
+    }
+}
