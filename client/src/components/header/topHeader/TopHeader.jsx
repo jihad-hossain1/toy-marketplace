@@ -16,13 +16,11 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 import { AuthContext } from "../../../authentication/AuthProvider";
-import useWhitelist from "../../../hooks/useWhitelist";
 import { Badge } from "antd";
 
 const TopHeader = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [whitelist] =useWhitelist()
-  // const [users] = 8
+
   return (
     <>
       <div className="bg-blue-gray-50 text-gray-700">
@@ -41,14 +39,14 @@ const TopHeader = () => {
                     ? `text-pink-400 flex items-center space-x-2 hover:text-pink-300`
                     : ` flex items-center space-x-2 hover:text-pink-300`
                 }
-                to={"/whitelist"}
+                to={"/userDashborad/whitelist"}
               >
                 <li className="text-sm md:text-md">whiteList</li>
                 <Badge
                   color="gold"
                   text=""
                   size="small"
-                  count={whitelist ? whitelist.length : 0}
+                  // count={whitelist ? whitelist.length : 0}
                 >
                   <RiHeartPulseFill className="text-pink-400 text-xl" />
                 </Badge>

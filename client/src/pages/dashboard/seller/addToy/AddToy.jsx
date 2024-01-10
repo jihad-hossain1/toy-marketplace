@@ -41,6 +41,10 @@ const AddToy = () => {
       return toast.error("user not found");
     }
     addProduct({ ...formData, email: user?.email, image: _photo });
+    if (isError) {
+      toast.error(`${error}`);
+      console.log(error);
+    }
     toast.success(`${formData?.toyTitle} added successfull`);
   };
 

@@ -27,6 +27,13 @@ const productSchema = mongoose.Schema(
   }
 );
 
+
+// productSchema.pre("remove", async function (next) {
+//   await Comment.deleteMany({ productId: this._id });
+//   next();
+// });
+
+
 const Product =
   mongoose.models.Product || mongoose.model("Product", productSchema);
 

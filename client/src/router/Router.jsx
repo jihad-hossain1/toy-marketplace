@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layouts/Main/Main";
 import Home from "../pages/home/Home";
 import AllToy from "../pages/allToy/AllToy";
-import WhiteList from "../pages/whiteList/WhiteList";
+// import WhiteList from "../pages/whiteList/WhiteList";
 import Tranding from "../pages/tranding/Tranding";
 import Contact from "../pages/contact/Contact";
 import Blogs from "../pages/blogs/Blogs";
@@ -18,10 +18,11 @@ import AddToy from "../pages/dashboard/seller/addToy/AddToy";
 import ManageToy from "../pages/dashboard/seller/manageToy/ManageToy";
 import Carts from "../pages/dashboard/user/userProfile/Carts";
 import UpdateToy from "../pages/dashboard/seller/updateToy/UpdateToy";
-import Checkout from "../pages/dashboard/user/checkout/Checkout";
 import UserCart from "../pages/dashboard/user/UserCart";
 import UserProfile from "../pages/dashboard/user/userProfile/UserProfile";
 import SellerDashboard from "../layouts/seller/SellerDashboard";
+import WhiteList from "../pages/dashboard/user/whiteList/WhiteList";
+import About from "../pages/about/About";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
+      },
+      {
+        path: "/about",
+        element: <About />
       },
     ],
   },
@@ -88,7 +93,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/userDashborad/checkout",
-        element: <Checkout></Checkout>,
+        element: <div>checkout</div>,
       },
     ],
   },

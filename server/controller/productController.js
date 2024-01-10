@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Product = require("../models/Product");
 const ProductDetail = require("../models/ProductDetail");
+const Review = require("../models/Review");
 
 const getProductByEmail = async (req, res) => {
   const email = req.params?.email;
@@ -120,10 +121,88 @@ const getProducts_page = async (req, res) => {
   //   res.json(products);
   // }
 };
+
+const deleteProductDetailsReview = async (req, res) => {
+  // con;
+  try {
+    const productId = req.params.id;
+    // console.log(productId);
+
+    // Find the product to get details and reviews
+    const product = await Product.findById(productId).populate("details");
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    // console.log(product);
+    // // Delete the product details
+    await ProductDetail.findByIdAndDelete(product.details);
+
+    // // Delete the associated reviews
+    await Review.deleteMany({ productId });
+
+    // // Delete the product itself
+    const deleteProduct = await Product.findByIdAndDelete(productId);
+    // console.log(deleteProduct);
+    res
+      .status(200)
+      .json({ message: "product delete Succcessfull", deleteProduct });
+  } catch (error) {
+    res.status(401).json({
+      message: "problem wiht geting product from server",
+      error: error?.message,
+    });
+  }
+};
+
+const deleteProductDetailsReviewEmail = async (req, res) => {
+  const email = req.params?.email;
+  const id = req.params.id;
+  // console.log(id, email);
+  try {
+    if (id && email) {
+      const product = await Product.findById(id).populate("details");
+      if (email === product.email) {
+        // // Delete the product details
+        const deleteDeteial = await ProductDetail.findByIdAndDelete(
+          product.details
+        );
+
+        // // Delete the associated reviews
+        const deleteReview = await Review.deleteMany({ productId: id });
+
+        // // Delete the product itself
+        const deleteProduct = await Product.findByIdAndDelete(id);
+        // console.log(deleteProduct);
+        res
+          .status(200)
+          .json({
+            message: "product delete Succcessfull",
+            deleteProduct,
+            deleteDeteial,
+            deleteReview,
+          });
+        // res.json(product);
+      } else {
+        res.status(404).json({ error: "you are not author this product," });
+      }
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+    } else {
+      res.status(404).json({ error: "product id & email are not match" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: `error from server: ${error}` });
+  }
+};
+
 module.exports = {
   getProducts,
   createProduct,
   getProductById,
   getProductByEmail,
   getProducts_page,
+  deleteProductDetailsReview,
+  deleteProductDetailsReviewEmail,
 };

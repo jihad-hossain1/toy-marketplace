@@ -5,6 +5,8 @@ const {
   getProductById,
   getProductByEmail,
   getProducts_page,
+  deleteProductDetailsReview,
+  deleteProductDetailsReviewEmail,
 } = require("../controller/productController");
 
 const router = express.Router();
@@ -18,5 +20,12 @@ router.get("/products/:id", getProductById);
 router.get("/userProducts/:email", getProductByEmail);
 
 router.post("/products", createProduct);
+
+router.delete("/products/:id", deleteProductDetailsReview);
+
+router.delete(
+  "/products_email/:id/user/:email",
+  deleteProductDetailsReviewEmail
+);
 
 module.exports = router;

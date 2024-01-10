@@ -9,6 +9,7 @@ const secureRoute = require("./routes/secureRoute");
 const commentsRoute = require("./routes/commentsRoute");
 const productRoute = require("./routes/productRoute");
 const reviewRoute = require("./routes/reviewRoute");
+const blogRoute = require("./routes/blogRoute");
 
 dotenv.config();
 connectDB();
@@ -26,6 +27,7 @@ app.use("/api", secureRoute);
 app.use("/api", commentsRoute);
 app.use("/api", productRoute);
 app.use("/api", reviewRoute);
+app.use("/api", blogRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(5000, console.log(`server run on port ${PORT}`));

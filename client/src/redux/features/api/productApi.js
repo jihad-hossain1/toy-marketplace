@@ -1,30 +1,26 @@
 import baseApi from "./baseApi";
 
 const productApi = baseApi.injectEndpoints({
+  // tagTypes: ["products"],
   endpoints: (builder) => ({
     // all query query
     getProducts: builder.query({
       query: () => "/api/products",
-      invalidatesTags: ["Products"],
+      // invalidatesTags: ["products"],
     }),
     getProductById: builder.query({
       query: (id) => `/api/products/${id}`,
     }),
     getUserProductByEmail: builder.query({
       query: (email) => `/api/userProducts/${email}`,
+      providesTags: ["products"],
     }),
-    // getProductsByPage: builder.query({
-    //   query: (params) => `/api/products_page?${new URLSearchParams(params)}`,
-    //   invalidatesTags: ["Products"],
-    // }),
+
     getProductsByPage: builder.query({
       query: (pageNumber) => `/api/products_page?page=${pageNumber}`,
-      invalidatesTags: ["Products"],
+      invalidatesTags: ["products"],
     }),
-    // getProductsByPage: builder.query({
-    //   query: (params) => `/api/products_page?${new URLSearchParams(params)}`,
-    //   invalidatesTags: ["Products"],
-    // }),
+
     // all mutation
     addProduct: builder.mutation({
       query: (product) => ({
@@ -32,7 +28,22 @@ const productApi = baseApi.injectEndpoints({
         method: "POST",
         body: product,
       }),
-      invalidatesTags: ["Products"],
+      invalidatesTags: ["products"],
+    }),
+
+    deleteSellerProduct: builder.mutation({
+      query: ({ id, email }) => ({
+        url: `/api/products_email/${id}/user/${email}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["products"],
+    }),
+    productDeleteByAdmin: builder.mutation({
+      query: ({ id }) => ({
+        url: `/api/products/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["products"],
     }),
   }),
   overrideExisting: false,
@@ -44,4 +55,6 @@ export const {
   useAddProductMutation,
   useGetUserProductByEmailQuery,
   useGetProductsByPageQuery,
+  useDeleteSellerProductMutation,
+  useProductDeleteByAdminMutation,
 } = productApi;

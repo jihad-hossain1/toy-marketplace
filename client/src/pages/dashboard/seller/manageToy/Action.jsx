@@ -15,11 +15,12 @@ import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import UpdateToy from "../updateToy/UpdateToy";
-
+import { useDeleteSellerProductMutation } from "../../../../redux/features/api/productApi";
 
 const Action = ({ ite }) => {
   // delete toy
-  const handleDeleteToy = (item) => {
+  const [deleteProduct] = useDeleteSellerProductMutation() || {};
+  const handleDeleteToy = async (item) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -30,15 +31,15 @@ const Action = ({ ite }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`${import.meta.env.VITE_BASE_URL}/toys/${item?._id}`)
-          .then((res) => {
-            if (res.data.deletedCount > 0) {
-              // refetch();
-              // Swal.fire("Deleted!", "Your file has been deleted.", "success");
-              toast.success("your toy delete successfull");
-            }
+        try {
+          deleteProduct({
+            id: ite?._id,
+            email: ite?.email,
           });
+          toast.success("reply deleted");
+        } catch (error) {
+          toast.error(`error: ${error?.message}`);
+        }
       }
     });
   };
