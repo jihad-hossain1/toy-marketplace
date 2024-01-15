@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Product = require("../models/Product");
+const dotenv = require("dotenv");
+dotenv.config();
+const stripe = require("stripe")(process.env.STRIPE_KEY);
+
+// console.log(process.env.STRIPE_KEY);
 
 const createUser = async (req, res) => {
   const isReq = req.body;
@@ -35,7 +40,6 @@ const getUserWithCart = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 
 const getUserById = async (req, res) => {
   const uid = req.params?.id;
@@ -108,6 +112,8 @@ const addUserCart = async (req, res) => {
 const increaseCartProduct = async (req, res) => {
   const _pid = req.params.userId;
   // console.log("user id : ", _pid);
+  const _id = req.body.productId;
+  // console.log(id);
   try {
     const { userId, productId } = req.body;
 
@@ -124,8 +130,16 @@ const increaseCartProduct = async (req, res) => {
         .status(404)
         .json({ error: "Product not found in the user's cart" });
     }
-    // const product = await Product.findById({ _id: productId });
-    // console.log(product);
+    // let product;
+    // try {
+    //   product = await Product.findById(productId);
+    //   if (!product) {
+    //     throw new Error("Product not found");
+    //   }
+    // } catch (productError) {
+    //   console.error("Error finding product:", productError);
+    //   return res.status(404).json({ error: "Product not found" });
+    // }
     // if (!product) {
     //   return res.status(404).json({ error: "Product not found" });
     // }
@@ -157,7 +171,7 @@ const decreaseCartProduct = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    const cartItem = user.cart.find((item) => item.productId.equals(productId));
+    const cartItem = user.cart.find((item) => item._id == productId);
 
     if (!cartItem) {
       return res
@@ -177,10 +191,25 @@ const decreaseCartProduct = async (req, res) => {
   }
 };
 
+const paymentByStripe = async (req, res) => {
+  const { total } = req.body;
+  if (total) {
+    const amount = parseFloat(total) * 100;
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount,
+      currency: "usd",
+      payment_method_types: ["card"],
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  }
+};
+
 const deleteUserProduct = async (req, res) => {
   const userId = req.params.userId;
   const productId = req.params.productId;
-  console.log(userId, productId);
+  // console.log(userId, productId);
 
   try {
     // Find the user's cart
@@ -214,4 +243,5 @@ module.exports = {
   deleteUserProduct,
   increaseCartProduct,
   decreaseCartProduct,
+  paymentByStripe,
 };

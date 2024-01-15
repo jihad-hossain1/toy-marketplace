@@ -86,6 +86,16 @@ const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Users"],
     }),
+
+    // /users/:userId/cart/decrease_cart_product
+    decreaseCartProduct: builder.mutation({
+      query: ({ userId, productId }) => ({
+        url: `/api/users/${userId}/cart/decrease_cart_product`,
+        method: "POST",
+        body: { userId, productId },
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
   overrideExisting: false,
 });
@@ -103,4 +113,5 @@ export const {
   useAddToCartMutation,
   useDeleteUserCartProductMutation,
   useIncreaseCartProductMutation,
+  useDecreaseCartProductMutation,
 } = userApi;

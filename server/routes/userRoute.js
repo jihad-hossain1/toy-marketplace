@@ -10,11 +10,14 @@ const {
   deleteUserProduct,
   increaseCartProduct,
   decreaseCartProduct,
+  paymentByStripe,
 } = require("../controller/userController");
 
 const router = express.Router();
 
 router.get("/users/:userId/cart", getUserWithCart);
+
+router.post("/users/create-payment-intent", paymentByStripe);
 
 router.post("/users/:userId/cart", addUserCart);
 
