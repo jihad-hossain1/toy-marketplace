@@ -30,7 +30,8 @@ const userApi = baseApi.injectEndpoints({
 
     getSingleUserCart: builder.query({
       query: (userId) => `api/users/${userId}/cart`,
-      invalidatesTags: ["Users"],
+      providesTags: ["Users"],
+      // providesTags: ["products"],
     }),
 
     //mutaion
@@ -42,6 +43,7 @@ const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Users"],
     }),
+
     setUser: builder.mutation({
       query: (post) => ({
         url: "/api/create_user",
@@ -58,11 +60,29 @@ const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Users"],
     }),
+
     updateUser: builder.mutation({
       query: ({ id, data }) => ({
         url: `/api/users/${id}`,
         method: "PUT",
         body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+
+    deleteUserCartProduct: builder.mutation({
+      query: ({ userId, productId }) => ({
+        url: `/api/users/${userId}/${productId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Users"],
+    }),
+    // /users/:userId/cart/increase_cart_product
+    increaseCartProduct: builder.mutation({
+      query: ({ userId, productId }) => ({
+        url: `/api/users/${userId}/cart/increase_cart_product`,
+        method: "POST",
+        body: { userId, productId },
       }),
       invalidatesTags: ["Users"],
     }),
@@ -81,4 +101,6 @@ export const {
   useUpdateUserMutation,
   useGetSingleUserCartQuery,
   useAddToCartMutation,
+  useDeleteUserCartProductMutation,
+  useIncreaseCartProductMutation,
 } = userApi;

@@ -36,6 +36,7 @@ const getUserWithCart = async (req, res) => {
   }
 };
 
+
 const getUserById = async (req, res) => {
   const uid = req.params?.id;
   try {
@@ -72,6 +73,7 @@ const updateUser = async (req, res) => {
     return res.json({ message: error });
   }
 };
+
 const addUserCart = async (req, res) => {
   // console.log(req.params.userId);
   const userId = req.params.userId;
@@ -103,6 +105,104 @@ const addUserCart = async (req, res) => {
   }
 };
 
+const increaseCartProduct = async (req, res) => {
+  const _pid = req.params.userId;
+  // console.log("user id : ", _pid);
+  try {
+    const { userId, productId } = req.body;
+
+    const user = await User.findById(userId);
+    // console.log(user);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const cartItem = user.cart.find((item) => item._id == productId);
+    // console.log(cartItem);
+    if (!cartItem) {
+      return res
+        .status(404)
+        .json({ error: "Product not found in the user's cart" });
+    }
+    // const product = await Product.findById({ _id: productId });
+    // console.log(product);
+    // if (!product) {
+    //   return res.status(404).json({ error: "Product not found" });
+    // }
+
+    // if (product?.quantity < cartItem?.quantity + 1) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Insufficient stock to increase quantity" });
+    // }
+    // Increase the quantity by 1
+    cartItem.quantity += 1;
+
+    await user.save();
+
+    res.json({ message: "Product quantity increased in the user's cart" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const decreaseCartProduct = async (req, res) => {
+  try {
+    const { userId, productId } = req.body;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const cartItem = user.cart.find((item) => item.productId.equals(productId));
+
+    if (!cartItem) {
+      return res
+        .status(404)
+        .json({ error: "Product not found in the user's cart" });
+    }
+
+    // Decrease the quantity by 1 (assuming minimum quantity is 1)
+    cartItem.quantity = Math.max(1, cartItem.quantity - 1);
+
+    await user.save();
+
+    res.json({ message: "Product quantity decreased in the user's cart" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const deleteUserProduct = async (req, res) => {
+  const userId = req.params.userId;
+  const productId = req.params.productId;
+  console.log(userId, productId);
+
+  try {
+    // Find the user's cart
+    const user = await User.findById({ _id: userId });
+
+    if (!user) {
+      return res.status(404).json({ error: "user not found" });
+    }
+
+    // Remove the product from the cart
+    user.cart.pull(productId);
+
+    // Save the updated cart
+    await user.save();
+
+    res.json({ message: "Product removed from the cart successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   createUser,
   getUsers,
@@ -111,4 +211,7 @@ module.exports = {
   updateUser,
   getUserWithCart,
   addUserCart,
+  deleteUserProduct,
+  increaseCartProduct,
+  decreaseCartProduct,
 };
