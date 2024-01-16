@@ -24,6 +24,9 @@ const ProceedCheckout = ({ total }) => {
           <PaymentForm total={total} />
         </Elements>
       )}
+      {/* <Elements stripe={stripePromise}>
+      </Elements> */}
+      {/* <PaymentForm total={total} /> */}
     </>
   );
 };

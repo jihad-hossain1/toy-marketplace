@@ -192,17 +192,38 @@ const decreaseCartProduct = async (req, res) => {
 };
 
 const paymentByStripe = async (req, res) => {
-  const { total } = req.body;
-  if (total) {
-    const amount = parseFloat(total) * 100;
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount,
-      currency: "usd",
-      payment_method_types: ["card"],
-    });
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    });
+ 
+  try {
+    const { total, cartsItem, userId } = req.body;
+    console.log(cartsItem, userId, total);
+
+    if (total && userId && cartsItem) {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: total,
+        currency: "usd",
+        payment_method_types: ["card"],
+      });
+
+      const deliveryInfo = {
+        transactionId: paymentIntent?.id,
+        products: cartsItem.map(({ product, quantity }) => ({
+          productId: product?._id,
+          quantity,
+        })),
+      };
+      await User.findByIdAndUpdate(userId, {
+        $push: { deliveries: deliveryInfo },
+        $pull: { cart: { _id: { $in: cartsItem } } },
+      });
+      res.send({
+        clientSecret: paymentIntent.client_secret,
+      });
+    } else {
+      res.status(404).json({ message: "amount not found" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: error });
   }
 };
 
