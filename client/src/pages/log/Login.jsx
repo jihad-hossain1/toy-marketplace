@@ -11,12 +11,8 @@ import {
   TabsBody,
   Tab,
   TabPanel,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
 } from "@material-tailwind/react";
-import {  LockClosedIcon } from "@heroicons/react/24/solid";
+import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { FcGoogle, FcKey } from "react-icons/fc";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
@@ -26,18 +22,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../authentication/AuthProvider";
 import { saveUser } from "../../authentication/auth";
-// import { useCountries } from "use-react-countries";
 const img_hosting_token = import.meta.env.VITE_IMGBB;
-// import { Icon } from 'react-icons-kit'
 
 export const Login = () => {
   //login card
   const [type, setType] = useState("card");
-  //phone number input country wise
-  // const { countries } = useCountries();
-  // const [country, setCountry] = useState(0);
-  // const { name, flags, countryCallingCode } = countries[country];
-  // password show icons
   const [isPassword, setIsPassword] = useState("");
   const [typeOfPassword, setTypeOfPassword] = useState("password");
   const [iconEye, setIconEye] = useState(eyeOff);
@@ -95,8 +84,7 @@ export const Login = () => {
     const name = form.name.value;
     // const phoneNumber = form.phoneNumber.value;
     const cpassword = form.cpassword.value;
-    
-    
+
     const image = form.image.files[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -159,7 +147,7 @@ export const Login = () => {
                       </Tab>
                     </TabsHeader>
                     <TabsBody
-                    //  className="!overflow-x-hidden !overflow-y-visible"
+                      //  className="!overflow-x-hidden !overflow-y-visible"
                       className="!overflow-x-hidden !overflow-y-hidden"
                       animate={{
                         initial: {
@@ -217,7 +205,12 @@ export const Login = () => {
                               />
                             </span>
                           </div>
-                          <Button type="submit" color="amber" size="lg" variant="gradient">
+                          <Button
+                            type="submit"
+                            color="amber"
+                            size="lg"
+                            variant="gradient"
+                          >
                             Log In
                           </Button>
                           <Typography
@@ -263,68 +256,7 @@ export const Login = () => {
                             name="name"
                             required
                           />
-                          {/* <div className="relative flex w-full max-w-[24rem]">
-                            <Menu placement="bottom-start">
-                              <MenuHandler>
-                                <Button
-                                  ripple={false}
-                                  variant="text"
-                                  color="blue-gray"
-                                  className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
-                                >
-                                  <img
-                                    src={flags.svg}
-                                    alt={name}
-                                    className="h-4 w-4 rounded-full object-cover"
-                                  />
-                                  {countryCallingCode}
-                                </Button>
-                              </MenuHandler>
-                              <MenuList className="max-h-[20rem] max-w-[18rem]">
-                                {countries.map(
-                                  (
-                                    { name, flags, countryCallingCode },
-                                    index
-                                  ) => {
-                                    return (
-                                      <MenuItem
-                                        key={name}
-                                        value={name}
-                                        className="flex items-center gap-2"
-                                        onClick={() => setCountry(index)}
-                                      >
-                                        <img
-                                          src={flags.svg}
-                                          alt={name}
-                                          className="h-5 w-5 rounded-full object-cover"
-                                        />
-                                        {name}{" "}
-                                        <span className="ml-auto">
-                                          {countryCallingCode}
-                                        </span>
-                                      </MenuItem>
-                                    );
-                                  }
-                                )}
-                              </MenuList>
-                            </Menu>
-                            <Input
-                            color="pink"
-                            variant="outlined"
-                            // label="Mobile Number"
-                              type="tel"
-                              name="phoneNumber"
-                              placeholder="Mobile Number"
-                              className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-pink-500"
-                              labelProps={{
-                                className:
-                                  "before:content-none after:content-none",
-                              }}
-                              containerProps={{
-                                className: "min-w-0",
-                              }}
-                            />
-                          </div> */}
+
                           <Input
                             type="email"
                             color="pink"
@@ -373,7 +305,12 @@ export const Login = () => {
                             label="Upload photo"
                           />
 
-                          <Button type="submit" color="amber" size="lg" variant="gradient">
+                          <Button
+                            type="submit"
+                            color="amber"
+                            size="lg"
+                            variant="gradient"
+                          >
                             Register
                           </Button>
                           <Typography

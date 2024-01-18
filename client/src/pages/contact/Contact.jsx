@@ -1,20 +1,23 @@
 import React from "react";
 import {Button, Input, Textarea} from "@material-tailwind/react"
 import toast, { Toaster } from 'react-hot-toast';
+import { animateLeftToRight, animateToTop } from "../../helpers/gsap";
 
 const Contact = () => {
-    const handleSubmit =(e)=>{
-        e.preventDefault();
-        const form = e.target
-        const name = form.name.value
-        const email = form.email.value
-        const message = form.message.value
-        
-        if(name && email && message){
-            toast.success('Thanks U For Connect Us');
-            form.reset();
-        }
+  animateLeftToRight(".contact");
+  animateToTop(".top");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    if (name && email && message) {
+      toast.success("Thanks U For Connect Us");
+      form.reset();
     }
+  };
   return (
     <div className="min-h-[60vh]">
       <Toaster />
@@ -36,7 +39,7 @@ const Contact = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-2">
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+            <div className="top grid grid-cols-1 gap-12 md:grid-cols-2">
               <div>
                 <span className="inline-block p-3 text-gray-600 rounded-full bg-blue-100/80 dark:bg-gray-800">
                   <svg
@@ -62,7 +65,7 @@ const Contact = () => {
                   Our friendly team is here to help.
                 </p>
                 <p className="mt-2 text-sm text-gray-600 dark:text-pink-400">
-                  hello@merakiui.com
+                  jihad@gmail.com
                 </p>
               </div>
 
@@ -164,7 +167,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="p-4 py-6 rounded-lg bg-gray-50 dark:bg-gray-800 md:p-8">
+            <div className="top p-4 py-6 rounded-lg bg-gray-50 dark:bg-gray-800 md:p-8">
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <Input
