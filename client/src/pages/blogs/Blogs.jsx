@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useGetBlogsQuery } from "../../redux/features/api/blogApi";
+import { timeFormate } from "../../utils/timeFormate";
 
 const Blogs = () => {
   const { data, isError, isLoading, error } = useGetBlogsQuery() || {};
-  console.log(data);
+
+  if (isError) return <div>{error?.message}</div>;
 
   return (
     <div className="min-h-[60vh]">
@@ -35,7 +37,7 @@ const Blogs = () => {
                     </Link>
                     <p>{blog?.shortContent}</p>
                     <span className="text-sm text-gray-500 dark:text-gray-300">
-                      {blog?.createdAt}
+                      {timeFormate(blog?.createdAt)}
                     </span>
                   </div>
                 </div>
