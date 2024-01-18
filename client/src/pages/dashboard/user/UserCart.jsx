@@ -14,7 +14,7 @@ const UserCart = () => {
     isError,
     error,
   } = useGetSingleUserCartQuery(userId) || {};
-  console.log(cartsItem);
+  // console.log(cartsItem);
   return (
     <div>
       <div className="grid lg:grid-cols-3 gap-4">
