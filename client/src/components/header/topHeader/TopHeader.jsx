@@ -7,7 +7,7 @@ import { TbLogin2, TbHelpTriangleFilled } from "react-icons/tb";
 import { RiHeartPulseFill } from "react-icons/ri";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { BiChevronDown, BiLogOut } from "react-icons/bi";
-
+import { MdAddShoppingCart } from "react-icons/md";
 import {
   Menu,
   MenuHandler,
@@ -81,9 +81,16 @@ const TopHeader = () => {
                             <span>Profile</span>
                           </MenuItem>
                         </Link>
-                        <Link to={"/userDashborad"}>
+
+                        <Link to={"/userDashborad/users/cart"}>
                           <MenuItem className="flex space-x-2 items-center">
                             {" "}
+                            <MdAddShoppingCart className="text-xl" />{" "}
+                            <span>Cart</span>
+                          </MenuItem>
+                        </Link>
+                        <Link to={"/dashboardSellerOnly"}>
+                          <MenuItem className="flex space-x-2 items-center">
                             <LuLayoutDashboard className="text-xl" />{" "}
                             <span>Dashboard</span>
                           </MenuItem>
