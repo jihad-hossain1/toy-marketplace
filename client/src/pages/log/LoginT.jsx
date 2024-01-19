@@ -55,8 +55,10 @@ const LoginT = () => {
   }
   if (isSuccess) {
     toast.success("login successfull");
+    const jsonData = JSON.stringify(data?.data);
+    localStorage.setItem("user", jsonData);
   }
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <TabPanel value="card" className="p-0">
