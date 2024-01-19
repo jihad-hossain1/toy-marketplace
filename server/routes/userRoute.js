@@ -1,4 +1,6 @@
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
 const {
   createUser,
   getUsers,
@@ -11,7 +13,13 @@ const {
   increaseCartProduct,
   decreaseCartProduct,
   paymentByStripe,
+  loginUser,
+  registerUser,
+  logoutUser,
+  getCurrentUser,
 } = require("../controller/userController");
+const { upload } = require("../middleware/multer.middleware");
+const verifyJWT = require("../middleware/auth.middleware");
 
 const router = express.Router();
 
@@ -27,15 +35,44 @@ router.post("/users/:userId/cart/decrease_cart_product", decreaseCartProduct);
 
 router.delete("/users/:userId/:productId", deleteUserProduct);
 
-router.get("/users", getUsers);
 
-router.get("/users/:id", getUserById);
+router.route("/users/register").post(
+  upload.fields([
+    {
+      name: "avatar",
+      maxCount: 1,
+    },
+    {
+      name: "coverImage",
+      maxCount: 1,
+    },
+  ]),
+  registerUser
+);
 
-router.put("/users/:id", updateUser);
+router.route("/users/login").post(loginUser);
 
-router.delete("/users/:id", deleteUser);
+// secure route
+
+router.route("/users/logout").post(verifyJWT, logoutUser);
+
+router.route("/users/current-user").get(verifyJWT, getCurrentUser);
 
 
-router.post("/create_user", createUser);
+
+
+
+
+
+// router.get("/users", getUsers);
+
+// router.get("/users/:id", getUserById);
+
+// router.put("/users/:id", updateUser);
+
+// router.delete("/users/:id", deleteUser);
+
+// router.post("/create_user", createUser);
+
 
 module.exports = router;

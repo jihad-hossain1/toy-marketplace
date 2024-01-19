@@ -3,6 +3,11 @@ import baseApi from "./baseApi";
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     //query
+    getCurrentUser: builder.query({
+      query: () => "/api/users/current-user",
+      invalidatesTags: ["Users"],
+    }),
+
     getUsers: builder.query({
       query: () => "/api/users",
       invalidatesTags: ["Users"],
@@ -35,6 +40,24 @@ const userApi = baseApi.injectEndpoints({
     }),
 
     //mutaion
+    registerUser: builder.mutation({
+      query: (formData) => ({
+        url: `/api/users/register`,
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+
+    userLogin: builder.mutation({
+      query: (formData) => ({
+        url: `/api/users/login`,
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+
     addToCart: builder.mutation({
       query: ({ userId, item }) => ({
         url: `/api/users/${userId}/cart`,
@@ -77,6 +100,7 @@ const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Users"],
     }),
+
     // /users/:userId/cart/increase_cart_product
     increaseCartProduct: builder.mutation({
       query: ({ userId, productId }) => ({
@@ -101,6 +125,8 @@ const userApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useUserLoginMutation,
+  useRegisterUserMutation,
   useSetUserMutation,
   useGetUserByIdQuery,
   useGetLogUserQuery,
@@ -114,4 +140,5 @@ export const {
   useDeleteUserCartProductMutation,
   useIncreaseCartProductMutation,
   useDecreaseCartProductMutation,
+  useGetCurrentUserQuery,
 } = userApi;

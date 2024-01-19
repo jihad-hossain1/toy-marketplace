@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { VscTag } from "react-icons/vsc";
 import { IoLogoUsd } from "react-icons/io";
@@ -15,11 +14,22 @@ import {
   MenuItem,
   Avatar,
 } from "@material-tailwind/react";
-import { AuthContext } from "../../../authentication/AuthProvider";
 import { Badge } from "antd";
+import { useGetCurrentUserQuery } from "../../../redux/features/api/userApi";
 
 const TopHeader = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const {
+    data: user,
+    isError: isUserError,
+    error: userError,
+    isLoading: isUserLoading,
+  } = useGetCurrentUserQuery() || {};
+
+  if (isUserError) {
+    console.log(userError);
+  }
+
+  console.log(user);
 
   return (
     <>
@@ -28,7 +38,7 @@ const TopHeader = () => {
           <div className="hidden md:block">
             <h4 className="flex text-gray-700 space-x-3 items-center">
               <VscTag />
-              <span> Welcome To Our Animal Toy Store</span>
+              <span> Welcome To Our Toy Store</span>
             </h4>
           </div>
           <div className="py-2 px-1">
@@ -67,7 +77,6 @@ const TopHeader = () => {
                       <>
                         <Link to={"/"}>
                           <MenuItem className="flex space-x-2 items-center">
-                            {" "}
                             <Avatar
                               size="sm"
                               alt="user photo"
@@ -84,24 +93,22 @@ const TopHeader = () => {
 
                         <Link to={"/userDashborad/users/cart"}>
                           <MenuItem className="flex space-x-2 items-center">
-                            {" "}
-                            <MdAddShoppingCart className="text-xl" />{" "}
+                            <MdAddShoppingCart className="text-xl" />
                             <span>Cart</span>
                           </MenuItem>
                         </Link>
                         <Link to={"/dashboardSellerOnly"}>
                           <MenuItem className="flex space-x-2 items-center">
-                            <LuLayoutDashboard className="text-xl" />{" "}
+                            <LuLayoutDashboard className="text-xl" />
                             <span>Dashboard</span>
                           </MenuItem>
                         </Link>
                         <Link to={"/"}>
                           <MenuItem
-                            onClick={logOut}
+                            onClick={""}
                             className="flex space-x-2 items-center"
                           >
-                            {" "}
-                            <BiLogOut className="text-xl" />{" "}
+                            <BiLogOut className="text-xl" />
                             <span>Log-Out</span>
                           </MenuItem>
                         </Link>
@@ -110,15 +117,13 @@ const TopHeader = () => {
                       <>
                         <Link to={"/login"}>
                           <MenuItem className="flex space-x-2 items-center">
-                            {" "}
                             <TbLogin2 className="text-xl" /> <span>Log-In</span>
                           </MenuItem>
                         </Link>
                       </>
                     )}
                     <MenuItem className="flex space-x-2 items-center">
-                      {" "}
-                      <TbHelpTriangleFilled className="text-xl" />{" "}
+                      <TbHelpTriangleFilled className="text-xl" />
                       <span>Help</span>
                     </MenuItem>
                   </MenuList>
@@ -129,17 +134,15 @@ const TopHeader = () => {
                 <Menu>
                   <MenuHandler>
                     <button className="flex space-x-2 items-center">
-                      <span className="text-sm md:text-md">USD $</span>{" "}
+                      <span className="text-sm md:text-md">USD $</span>
                       <BiChevronDown className="text-md md:text-xl" />
                     </button>
                   </MenuHandler>
                   <MenuList>
                     <MenuItem className="flex space-x-2 items-center">
-                      {" "}
                       <IoLogoUsd className="text-xl" /> <span>USD</span>
                     </MenuItem>
                     <MenuItem className="flex space-x-2 items-center">
-                      {" "}
                       <PiCurrencyGbpBold className="text-xl" /> <span>GBP</span>
                     </MenuItem>
                   </MenuList>
