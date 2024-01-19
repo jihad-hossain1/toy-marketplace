@@ -7,6 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../../../authentication/AuthProvider";
+import { useSelector } from "react-redux";
 
 
 
@@ -14,7 +15,8 @@ const SingleReview = ({ item, refetch }) => {
   const modalRef = useRef(null);
   const formRef = useRef(null);
   const [updateData, setUpdateData] = useState(null);
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+    const { user, isAuthenticated } = useSelector((state) => state.auth);
   const {
     review,
     reviewCount,

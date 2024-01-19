@@ -8,11 +8,11 @@ import Icon from "react-icons-kit";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useUserLoginMutation } from "../../redux/features/api/userApi";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useSavedUserLoginMutation } from "../../redux/features/api/authApi";
+import { setUser } from "../../redux/features/auth.sclice";
 
 const LoginT = () => {
-  const [loginUser, { data, isError, error, isSuccess, isLoading }] =
-    useUserLoginMutation() || {};
-
   const [typeOfPassword, setTypeOfPassword] = useState("password");
   const [iconEye, setIconEye] = useState(eyeOff);
   const handlePasswordShowToggle = () => {
@@ -24,6 +24,9 @@ const LoginT = () => {
       setTypeOfPassword("password");
     }
   };
+
+  const dispatch = useDispatch();
+  const [login, { isLoading, isError, error }] = useSavedUserLoginMutation();
 
   const scafolding = {
     username: "",
@@ -46,19 +49,20 @@ const LoginT = () => {
   // register section
   const handleSubmitsLogIn = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    loginUser({ ...formData });
+
+    const { email, password, username } = formData;
+
+    try {
+      const { data } = await login({ email, password, username });
+
+      console.log(data.data.user);
+
+      dispatch(setUser(data?.data?.user));
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
-  if (isError) {
-    console.log(error);
-  }
-  if (isSuccess) {
-    toast.success("login successfull");
-    const jsonData = JSON.stringify(data?.data);
-    localStorage.setItem("user", jsonData);
-  }
-  // console.log(data);
   return (
     <>
       <TabPanel value="card" className="p-0">

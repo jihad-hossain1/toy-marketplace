@@ -75,21 +75,6 @@ const Action = ({ ite }) => {
           </MenuItem>
         </MenuList>
       </Menu>
-
-      {/* <div>
-      <FloatButton.Group
-      trigger="click"
-      type="primary"
-      className=""
-      style={{
-        // right: 24,
-      }}
-      icon={<CustomerServiceOutlined className="" />}
-    >
-      <FloatButton />
-      <FloatButton icon={<CommentOutlined />} />
-    </FloatButton.Group>
-      </div> */}
     </>
   );
 };

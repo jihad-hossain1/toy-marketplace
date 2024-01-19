@@ -6,9 +6,11 @@ import toast from "react-hot-toast";
 import { Alert, Button } from "@material-tailwind/react";
 import { LuCheckCheck } from "react-icons/lu";
 import { useGetSingleUserCartQuery } from "../../../redux/features/api/userApi";
+import { useSelector } from "react-redux";
 
 const PaymentForm = ({ total }) => {
-  const userId = "65283decc56a5ba37161e5f1";
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const userId = user?._id;
   const {
     data: cartsItem,
     isLoading,
@@ -73,8 +75,8 @@ const PaymentForm = ({ total }) => {
         payment_method: {
           card: card,
           billing_details: {
-            name: "jihad",
-            email: "jihad@gmail.com",
+            name: user?.fullname,
+            email: user?.email,
           },
         },
       });

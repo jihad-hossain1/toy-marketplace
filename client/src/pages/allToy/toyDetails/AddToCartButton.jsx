@@ -1,8 +1,10 @@
 import toast, { Toaster } from "react-hot-toast";
 import { useAddToCartMutation } from "../../../redux/features/api/userApi";
+import { useSelector } from "react-redux";
 
 const AddToCartButton = ({ pid, quantity }) => {
-  const userId = "65283decc56a5ba37161e5f1";
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const userId = user?._id;
   const email = "jihadkhan934@gmail.com";
 
   const [addToCart, { data, isError, error, isSuccess }] =

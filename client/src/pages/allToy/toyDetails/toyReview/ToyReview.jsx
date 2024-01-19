@@ -4,9 +4,11 @@ import { AuthContext } from "../../../../authentication/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { useAddReviewMutation } from "../../../../redux/features/api/reviewApi";
 import FetchAllReview from "./FetchAllReview";
+import { useSelector } from "react-redux";
 
 const ToyReview = ({ pid }) => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   const [content, setcontent] = useState("");
 
@@ -23,7 +25,7 @@ const ToyReview = ({ pid }) => {
       productId: pid,
       data: {
         productId: pid,
-        username: user?.displayName,
+        username: user?.username,
         content,
       },
     });

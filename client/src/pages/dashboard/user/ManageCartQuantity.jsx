@@ -5,9 +5,12 @@ import {
   useDecreaseCartProductMutation,
   useIncreaseCartProductMutation,
 } from "../../../redux/features/api/userApi";
+import { useSelector } from "react-redux";
 
 const ManageCartQuantity = ({ quantity, productId }) => {
-  const userId = "65283decc56a5ba37161e5f1";
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+
+  const userId = user?._id;
 
   const [increaseCartProduct] = useIncreaseCartProductMutation() || {};
   const [decreaseCartProduct] = useDecreaseCartProductMutation() || {};

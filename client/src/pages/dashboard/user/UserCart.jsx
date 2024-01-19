@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import SingleCart from "./SingleCart";
 import AllItemDeleteFromCart from "./AllItemDeleteFromCart";
 import OrderSummary from "./OrderSummary";
+import { useSelector } from "react-redux";
 
 const UserCart = () => {
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   let { uid } = useParams();
-  const userId = "65283decc56a5ba37161e5f1";
+  const userId = user?._id;
   const {
     data: cartsItem,
     isLoading,

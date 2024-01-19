@@ -4,10 +4,12 @@ import { Rate } from "antd";
 import toast, { Toaster } from "react-hot-toast";
 import WhitelistButton from "./WhitelistButton";
 import { useAddToCartMutation } from "../../../redux/features/api/userApi";
+import { useSelector } from "react-redux";
 
 const SingleCard = ({ card }) => {
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const { price, image, toyTitle, rating, quantity } = card;
-  const userId = "65283decc56a5ba37161e5f1";
+  const userId = user?._id;
 
   const [addToCart, { data, isError, error, isSuccess }] =
     useAddToCartMutation() || {};

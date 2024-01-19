@@ -3,10 +3,11 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../../authentication/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { useAddProductMutation } from "../../../../redux/features/api/productApi";
-
 import SingleInformation from "./SingleInformation";
+import { useSelector } from "react-redux";
+
 const AddToy = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const [_photo, setPhoto] = useState("");
 
   const [addProduct, { data: product, isError, isLoading, isSuccess, error }] =

@@ -3,9 +3,10 @@ import { Button, IconButton, Input, MenuItem, Textarea } from '@material-tailwin
 import React, { useContext, useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../../../../authentication/AuthProvider';
+import { useSelector } from "react-redux";
 
 const UpdateToy = ({ ite }) => {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const modalRef = useRef(null);
   const formRef = useRef(null);
   const [updateData, setUpdateData] = useState(null);

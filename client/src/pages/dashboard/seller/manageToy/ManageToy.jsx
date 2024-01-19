@@ -18,11 +18,12 @@ import {
 } from "@material-tailwind/react";
 import { useGetUserProductByEmailQuery } from "../../../../redux/features/api/productApi";
 import LineSkeleton from "../../../../components/skeleton/LineSkeleton";
+import { useSelector } from "react-redux";
 
 const TABLE_HEAD = ["Avatar", "Info", "Category", "Price", "QTY", "Action"];
 
 const ManageToy = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const email = user?.email;
   const {
     data: products,

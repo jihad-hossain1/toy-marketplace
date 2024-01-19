@@ -2,9 +2,11 @@ import React from "react";
 import { useDeleteUserCartProductMutation } from "../../redux/features/api/userApi";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const DeleteCartItem = ({ productId }) => {
-  const userId = "65283decc56a5ba37161e5f1";
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const userId = user?._id;
 
   const [deleteCartProduct, { data, isSuccess }] =
     useDeleteUserCartProductMutation() || {};

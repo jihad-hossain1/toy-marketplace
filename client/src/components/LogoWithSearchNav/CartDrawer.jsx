@@ -8,11 +8,12 @@ import { Badge } from "antd";
 import toast, { Toaster } from "react-hot-toast";
 import { useGetSingleUserCartQuery } from "../../redux/features/api/userApi";
 import DeleteCartItem from "./DeleteCartItem";
+import { useSelector } from "react-redux";
 
 const CartDrawer = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
-  const userId = "65283decc56a5ba37161e5f1";
+  const userId = user?._id;
   const {
     data: cartsItem,
     isLoading,

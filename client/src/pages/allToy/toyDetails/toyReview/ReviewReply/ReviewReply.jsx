@@ -5,9 +5,11 @@ import toast from "react-hot-toast";
 import { useAddReplyMutation } from "../../../../../redux/features/api/reviewApi";
 import { BsThreeDots } from "react-icons/bs";
 import ReplyAction from "./ReplyAction";
+import { useSelector } from "react-redux";
 
 const ReviewReply = ({ rid, replies, productId }) => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   const [content, setcontent] = useState("");
   const [toggle, setToggle] = useState(false);

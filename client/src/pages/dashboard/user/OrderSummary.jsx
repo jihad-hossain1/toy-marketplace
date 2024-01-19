@@ -2,9 +2,11 @@ import React from "react";
 import { useGetSingleUserCartQuery } from "../../../redux/features/api/userApi";
 import { Link } from "react-router-dom";
 import ProceedCheckout from "./ProceedCheckout";
+import { useSelector } from "react-redux";
 
 const OrderSummary = () => {
-  const userId = "65283decc56a5ba37161e5f1";
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const userId = user?._id;
   const {
     data: cartsItem,
     isLoading,

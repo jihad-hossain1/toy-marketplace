@@ -5,9 +5,11 @@ import { useDeleteUserCartProductMutation } from "../../../redux/features/api/us
 import ManageCartQuantity from "./ManageCartQuantity";
 import { FaRegHeart } from "react-icons/fa6";
 import { Checkbox } from "@material-tailwind/react";
+import { useSelector } from "react-redux";
 
 const SingleCart = ({ cartitem, productId, quantity }) => {
-  const userId = "65283decc56a5ba37161e5f1";
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const userId = user?._id;
 
   const [deleteCartProduct, { data, isSuccess }] =
     useDeleteUserCartProductMutation() || {};

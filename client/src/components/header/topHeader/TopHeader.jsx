@@ -15,21 +15,16 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 import { Badge } from "antd";
-import { useGetCurrentUserQuery } from "../../../redux/features/api/userApi";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../../redux/features/auth.sclice";
 
 const TopHeader = () => {
-  const {
-    data: user,
-    isError: isUserError,
-    error: userError,
-    isLoading: isUserLoading,
-  } = useGetCurrentUserQuery() || {};
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  if (isUserError) {
-    console.log(userError);
-  }
-
-  console.log(user);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <>
@@ -103,7 +98,7 @@ const TopHeader = () => {
                             <span>Dashboard</span>
                           </MenuItem>
                         </Link>
-                        <Link to={"/"}>
+                        <button onClick={() => handleLogout()} to={"/"}>
                           <MenuItem
                             onClick={""}
                             className="flex space-x-2 items-center"
@@ -111,7 +106,7 @@ const TopHeader = () => {
                             <BiLogOut className="text-xl" />
                             <span>Log-Out</span>
                           </MenuItem>
-                        </Link>
+                        </button>
                       </>
                     ) : (
                       <>
