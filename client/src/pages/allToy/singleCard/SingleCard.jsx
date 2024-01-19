@@ -15,6 +15,9 @@ const SingleCard = ({ card }) => {
     useAddToCartMutation() || {};
 
   const handleCart = async (pid, qty) => {
+    if (!isAuthenticated) {
+      return toast.error("<---- Login first ---->");
+    }
     addToCart({ userId: userId, item: { id: pid, quantity: qty } });
   };
 

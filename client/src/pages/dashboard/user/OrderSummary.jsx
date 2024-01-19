@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 const OrderSummary = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const userId = user?._id;
+
   const {
     data: cartsItem,
     isLoading,

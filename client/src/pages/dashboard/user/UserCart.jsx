@@ -1,6 +1,5 @@
 import React from "react";
 import { useGetSingleUserCartQuery } from "../../../redux/features/api/userApi";
-import { useParams } from "react-router-dom";
 import SingleCart from "./SingleCart";
 import AllItemDeleteFromCart from "./AllItemDeleteFromCart";
 import OrderSummary from "./OrderSummary";
@@ -8,15 +7,15 @@ import { useSelector } from "react-redux";
 
 const UserCart = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
-  let { uid } = useParams();
   const userId = user?._id;
+
   const {
     data: cartsItem,
     isLoading,
     isError,
     error,
   } = useGetSingleUserCartQuery(userId) || {};
-  // console.log(cartsItem);
+
   return (
     <div>
       <div className="grid lg:grid-cols-3 gap-4">

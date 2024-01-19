@@ -5,12 +5,16 @@ import { useSelector } from "react-redux";
 const AddToCartButton = ({ pid, quantity }) => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const userId = user?._id;
-  const email = "jihadkhan934@gmail.com";
+
 
   const [addToCart, { data, isError, error, isSuccess }] =
     useAddToCartMutation() || {};
 
   const handleCart = async (pid, qty) => {
+
+    if (!isAuthenticated) {
+      return toast.error("<---- Login first ---->");
+    }
     addToCart({ userId: userId, item: { id: pid, quantity: qty } });
   };
 

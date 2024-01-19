@@ -17,6 +17,7 @@ const PaymentForm = ({ total }) => {
     isError,
     error,
   } = useGetSingleUserCartQuery(userId) || {};
+
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");

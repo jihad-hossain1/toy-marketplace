@@ -15,7 +15,11 @@ const SingleTrandingToy = ({ ite }) => {
     useAddToCartMutation() || {};
 
   const handleCart = async (pid, qty) => {
-    addToCart({ userId: userId, item: { id: pid, quantity: qty } });
+    if (!isAuthenticated) {
+      return toast.error("<---- Login first ---->");
+    } else {
+      addToCart({ userId: userId, item: { id: pid, quantity: qty } });
+    }
   };
 
   if (isError) {

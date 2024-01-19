@@ -1,18 +1,26 @@
 import { Button, Input, TabPanel, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useUserLoginMutation } from "../../redux/features/api/userApi";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSavedUserLoginMutation } from "../../redux/features/api/authApi";
 import { setUser } from "../../redux/features/auth.sclice";
 
 const LoginT = () => {
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+
+  // if (isAuthenticated) {
+  //   return <div>You are already LoggedIn</div>;
+  // }
+
   const [typeOfPassword, setTypeOfPassword] = useState("password");
   const [iconEye, setIconEye] = useState(eyeOff);
   const handlePasswordShowToggle = () => {
@@ -55,9 +63,13 @@ const LoginT = () => {
     try {
       const { data } = await login({ email, password, username });
 
-      console.log(data.data.user);
+      // console.log(data.data.user);
 
       dispatch(setUser(data?.data?.user));
+      toast.success("Login Successfull");
+      if (data) {
+        navigate("/");
+      }
     } catch (error) {
       console.error("Login failed:", error);
     }
