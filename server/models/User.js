@@ -38,6 +38,11 @@ const userSchema = mongoose.Schema(
     coverImage: {
       type: String,
     },
+    role: {
+      type: String,
+      enum: ["admin", "seller", "user"],
+      default: "user",
+    },
     cart: [
       {
         product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
