@@ -1,17 +1,22 @@
 import { Button, Input, TabPanel, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useRegisterUserMutation } from "../../redux/features/api/userApi";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/auth.sclice";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [registerUser, { data, isError, isLoading, isSuccess, error }] =
     useRegisterUserMutation() || {};
+
   const [typeOfPassword, setTypeOfPassword] = useState("password");
   const [iconEye, setIconEye] = useState(eyeOff);
   const handlePasswordShowToggle = () => {
@@ -48,8 +53,11 @@ const Register = () => {
   // register section
   const handleSubmitRegister = async (e) => {
     e.preventDefault();
-    // console.log(formData);
-    registerUser({ ...formData });
+    try {
+      registerUser({ ...formData });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (isError) {
@@ -57,6 +65,12 @@ const Register = () => {
   }
   if (isSuccess) {
     toast.success("user account created successfull");
+
+    dispatch(setUser(data?.data));
+
+    if (data) {
+      navigate("/");
+    }
   }
   return (
     <>

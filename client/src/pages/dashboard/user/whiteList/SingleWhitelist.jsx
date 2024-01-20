@@ -1,15 +1,10 @@
-import React, { useContext } from "react";
 import { TbEye } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { Rate } from "antd";
 import toast, { Toaster } from "react-hot-toast";
-import useUserCart from "../../../../hooks/useUserCart";
 import { FiTrash2 } from "react-icons/fi";
-import { AuthContext } from "../../../../authentication/AuthProvider";
 
 const SingleWhitelist = () => {
-  const { user } = useContext(AuthContext);
-
   return (
     <div>
       {/* <div className="group">

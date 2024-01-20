@@ -17,10 +17,6 @@ const LoginT = () => {
 
   const navigate = useNavigate();
 
-  // if (isAuthenticated) {
-  //   return <div>You are already LoggedIn</div>;
-  // }
-
   const [typeOfPassword, setTypeOfPassword] = useState("password");
   const [iconEye, setIconEye] = useState(eyeOff);
   const handlePasswordShowToggle = () => {
@@ -43,6 +39,8 @@ const LoginT = () => {
   };
 
   const [formData, setFormData] = useState(scafolding);
+
+  
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -84,6 +82,7 @@ const LoginT = () => {
         >
           <Input
             defaultValue={formData?.username}
+            // value={formData.username}
             onChange={handleChange}
             type="text"
             color="pink"
@@ -104,6 +103,7 @@ const LoginT = () => {
           <div className="flex my-4">
             <Input
               defaultValue={formData?.password}
+              // value={formData.password}
               onChange={handleChange}
               required
               type={typeOfPassword}
@@ -131,6 +131,15 @@ const LoginT = () => {
             valid information
           </Typography>
         </form>
+        <Button
+          className="w-full mt-2"
+          type="button"
+          color="green"
+          size="md"
+          variant="gradient"
+        >
+          Demo Credential
+        </Button>
         <div className="flex flex-col items-center gap-4 py-2">
           <Link to={"/"}>
             <Button variant="text" className="flex items-center gap-2">

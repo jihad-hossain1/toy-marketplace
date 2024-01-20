@@ -1,10 +1,6 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../../../authentication/AuthProvider";
 import SingleWhitelist from "./SingleWhitelist";
 
 const WhiteList = () => {
-  const { user } = useContext(AuthContext);
-
   return (
     <section className="min-h-screen">
       <div className=" px-3 py-6">

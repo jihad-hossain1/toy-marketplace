@@ -17,9 +17,14 @@ import {
 import { Badge } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../redux/features/auth.sclice";
+import { useState } from "react";
 
 const TopHeader = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
+
+  const seller = user?.role == "seller";
+  const admin = user?.role == "admin";
+
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -76,8 +81,8 @@ const TopHeader = () => {
                               size="sm"
                               alt="user photo"
                               src={
-                                user?.photoURL
-                                  ? user?.photoURL
+                                user?.avatar
+                                  ? user?.avatar
                                   : "https://i.ibb.co/R7B1dV8/cat4.png"
                               }
                               className="border border-yellow-500 shadow-xl shadow-green-900/20 ring-4 ring-pink-200/30 mr-2"
@@ -92,12 +97,24 @@ const TopHeader = () => {
                             <span>Cart</span>
                           </MenuItem>
                         </Link>
-                        <Link to={"/dashboardSellerOnly"}>
-                          <MenuItem className="flex space-x-2 items-center">
-                            <LuLayoutDashboard className="text-xl" />
-                            <span>Dashboard</span>
-                          </MenuItem>
-                        </Link>
+                        {seller ? (
+                          <Link to={"/dashboardSellerOnly"}>
+                            <MenuItem className="flex space-x-2 items-center">
+                              <LuLayoutDashboard className="text-xl" />
+                              <span>Dashboard</span>
+                            </MenuItem>
+                          </Link>
+                        ) : (
+                          ""
+                        )}
+                        {admin && (
+                          <Link to={"/dashboardAdminOnly"}>
+                            <MenuItem className="flex space-x-2 items-center">
+                              <LuLayoutDashboard className="text-xl" />
+                              <span>Admin</span>
+                            </MenuItem>
+                          </Link>
+                        )}
                         <button onClick={() => handleLogout()} to={"/"}>
                           <MenuItem
                             onClick={""}
