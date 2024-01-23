@@ -281,7 +281,7 @@ const registerUser = asyncHandlerPromise(async (req, res) => {
   if (
     [fullname, email, username, password].some((field) => field?.trim() === "")
   ) {
-    throw new ApiError(400, "All fields is required");
+    return res.status(400).json({ error: "All fields is required" });
   }
 
   // check if user already exists: username, email
@@ -290,40 +290,14 @@ const registerUser = asyncHandlerPromise(async (req, res) => {
   });
 
   if (existedUser) {
-    throw new ApiError(409, "User with email or usernaem already exist");
+    return res
+      .status(409)
+      .json({ error: "User with email or usernaem already exist" });
   }
-
-  // check for images, check for avatar
-  // const avatarLocalPath = req.files?.avatar[0]?.path;
-  // // const avatarLocalPath = req.files?.avatar[0]?.path;
-
-  // let coverImageLocalPath;
-  // // console.log("= require if ... ", Array.isArray(req.files?.coverImage));
-  // if (
-  //   req.files &&
-  //   Array.isArray(req.files?.coverImage) &&
-  //   req.files?.coverImage?.length > 0
-  // ) {
-  //   coverImageLocalPath = req.files.coverImage[0].path;
-  // }
-
-  // if (!avatarLocalPath) {
-  //   throw new ApiError(400, "avatar file is required");
-  // }
-
-  // // upload them to cloudinary, avatar
-  // const avatar = await uploadOnCloudinary(avatarLocalPath);
-  // const coverImage = await uploadOnCloudinary(coverImageLocalPath);
-
-  // if (!avatar) {
-  //   throw new ApiError(400, "Avater is required");
-  // }
 
   // create user object - crate entry in db
   const user = await User.create({
     fullname,
-    // avatar: avatar.url,
-    // coverImage: coverImage?.url || "",
     email,
     password,
     username: username.toLowerCase(),
@@ -336,17 +310,15 @@ const registerUser = asyncHandlerPromise(async (req, res) => {
 
   // check for user creation
   if (!createdUser) {
-    throw new ApiError(500, "something went wrong while registring the user");
+    return res
+      .status(500)
+      .json({ error: "something went wrong while registring the user" });
   }
 
   // return res
   return res
     .status(201)
-    .json(new ApiResponse(200, createdUser, "user register successfully"));
-
-  //   res.status(200).json({
-  //     message: "ok",
-  //   });
+    .json({ createdUser, message: "user register successfully" });
 });
 
 const loginUser = asyncHandlerPromise(async (req, res) => {

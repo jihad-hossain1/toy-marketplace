@@ -8,7 +8,7 @@ import { Checkbox } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 
 const SingleCart = ({ cartitem, productId, quantity }) => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+   const user = useSelector((state) => state.auth?.userData);
   const userId = user?._id;
 
   const [deleteCartProduct, { data, isSuccess }] =

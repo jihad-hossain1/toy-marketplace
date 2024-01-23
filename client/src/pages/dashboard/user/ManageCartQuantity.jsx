@@ -8,7 +8,7 @@ import {
 import { useSelector } from "react-redux";
 
 const ManageCartQuantity = ({ quantity, productId }) => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+   const user = useSelector((state) => state.auth?.userData);
 
   const userId = user?._id;
 

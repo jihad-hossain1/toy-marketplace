@@ -3,14 +3,14 @@ const User = require("../models/User");
 const { ApiError } = require("../utils/ApiError");
 const { asyncHandlerPromise } = require("../utils/asyncHandler");
 
-const verifyJWT = asyncHandlerPromise(async (req, _, next) => {
+const verifyJWT = asyncHandlerPromise(async (req, res, next) => {
   try {
     const token =
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
 
     if (!token) {
-      throw new ApiError(401, "unauthorized requiest");
+      return res.status(401).json({ error: "unauthorized requiest" });
     }
 
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
@@ -20,13 +20,13 @@ const verifyJWT = asyncHandlerPromise(async (req, _, next) => {
     );
 
     if (!user) {
-      throw new ApiError(401, "Invalid access token");
+      return res.status(401).json({ error: "Invalid access token" });
     }
 
     req.user = user;
     next();
   } catch (error) {
-    throw new ApiError(401, error?.message || "invalid access token");
+    return res.status(401).json(error?.message || "invalid access token");
   }
 });
 

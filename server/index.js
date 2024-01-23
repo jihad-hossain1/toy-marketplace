@@ -11,13 +11,24 @@ const commentsRoute = require("./routes/commentsRoute");
 const productRoute = require("./routes/productRoute");
 const reviewRoute = require("./routes/reviewRoute");
 const blogRoute = require("./routes/blogRoute");
+const originOption = require("./config/optionOrigin");
 
 dotenv.config();
 connectDB();
 const app = express();
 app.use(cookieParser());
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: originOption || process.env.CORS_ORIGIN,
+    credentials: true,
+    // origin: "http://localhost:3000",
+  })
+);
 app.use(express.json());
+
+app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.send("api runing");

@@ -4,7 +4,7 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
 const AllItemDeleteFromCart = () => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+   const user = useSelector((state) => state.auth?.userData);
   const userId = user?._id;
   const {
     data: cartsItem,

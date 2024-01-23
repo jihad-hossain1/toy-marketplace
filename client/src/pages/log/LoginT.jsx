@@ -11,9 +11,14 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useSavedUserLoginMutation } from "../../redux/features/api/authApi";
 import { setUser } from "../../redux/features/auth.sclice";
+import { getCurrentUser, userLogin } from "../../redux/features/auth/authSlice";
 
 const LoginT = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const [username, setusername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -30,46 +35,23 @@ const LoginT = () => {
   };
 
   const dispatch = useDispatch();
-  const [login, { isLoading, isError, error }] = useSavedUserLoginMutation();
+  const loading = useSelector((state) => state.auth?.loading);
 
-  const scafolding = {
-    username: "",
-    email: "",
-    password: "",
-  };
-
-  const [formData, setFormData] = useState(scafolding);
-
-  
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // register section
   const handleSubmitsLogIn = async (e) => {
     e.preventDefault();
 
-    const { email, password, username } = formData;
+    const data = {
+      email,
+      password,
+      username,
+    };
 
-    try {
-      const { data } = await login({ email, password, username });
+    const response = await dispatch(userLogin(data));
 
-      // console.log(data.data.user);
+    const user = await dispatch(getCurrentUser());
 
-      dispatch(setUser(data?.data?.user));
-      toast.success("Login Successfull");
-      if (data) {
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Login failed:", error);
+    if (user && response?.payload) {
+      navigate("/");
     }
   };
 
@@ -81,10 +63,8 @@ const LoginT = () => {
           className="mt-12 flex flex-col  gap-1"
         >
           <Input
-            defaultValue={formData?.username}
-            // value={formData.username}
-            onChange={handleChange}
-            type="text"
+            value={username}
+            onChange={(e) => setusername(e.target.value)}
             color="pink"
             label="User Name"
             variant="outlined"
@@ -92,8 +72,8 @@ const LoginT = () => {
           />
           <div className="text-center text-xs text-pink-400">Or</div>
           <Input
-            defaultValue={formData?.email}
-            onChange={handleChange}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             type="email"
             color="pink"
             label="Your Email"
@@ -102,9 +82,9 @@ const LoginT = () => {
           />
           <div className="flex my-4">
             <Input
-              defaultValue={formData?.password}
+              value={password}
               // value={formData.password}
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
               required
               type={typeOfPassword}
               color="pink"
@@ -119,8 +99,14 @@ const LoginT = () => {
               <Icon className="absolute mr-10" icon={iconEye} size={16} />
             </span>
           </div>
-          <Button type="submit" color="amber" size="lg" variant="gradient">
-            Log In
+          <Button
+            type="submit"
+            color="amber"
+            size="lg"
+            variant="gradient"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Log In"}
           </Button>
           <Typography
             variant="small"
@@ -132,6 +118,11 @@ const LoginT = () => {
           </Typography>
         </form>
         <Button
+          onClick={() => {
+            setusername("guset");
+            setEmail("guest@example.com");
+            setPassword("123456");
+          }}
           className="w-full mt-2"
           type="button"
           color="green"

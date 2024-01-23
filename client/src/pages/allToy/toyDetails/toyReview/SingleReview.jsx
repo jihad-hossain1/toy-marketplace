@@ -16,7 +16,7 @@ const SingleReview = ({ item, refetch }) => {
   const formRef = useRef(null);
   const [updateData, setUpdateData] = useState(null);
   // const { user } = useContext(AuthContext);
-    const { user, isAuthenticated } = useSelector((state) => state.auth);
+    const user = useSelector((state) => state.auth?.userData);
   const {
     review,
     reviewCount,

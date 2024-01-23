@@ -16,11 +16,14 @@ import {
 } from "@material-tailwind/react";
 import { Badge } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../../redux/features/auth.sclice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  getCurrentUser,
+  userLogout,
+} from "../../../redux/features/auth/authSlice";
 
 const TopHeader = () => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth?.userData);
 
   const seller = user?.role == "seller";
   const admin = user?.role == "admin";
@@ -28,9 +31,15 @@ const TopHeader = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(userLogout());
   };
 
+  useEffect(() => {
+    if (!user) {
+      console.log("user are not found");
+    }
+    dispatch(getCurrentUser());
+  }, [dispatch]);
   return (
     <>
       <div className="bg-blue-gray-50 text-gray-700">
@@ -67,7 +76,7 @@ const TopHeader = () => {
                   <MenuHandler>
                     <button className="flex space-x-2 items-center">
                       <span className="text-sm md:text-md">
-                        {user?.displayName ? user?.displayName : "Account"}
+                        {user ? user?.username : "Account"}
                       </span>{" "}
                       <BiChevronDown className="text-md md:text-xl" />
                     </button>
@@ -115,7 +124,7 @@ const TopHeader = () => {
                             </MenuItem>
                           </Link>
                         )}
-                        <button onClick={() => handleLogout()} to={"/"}>
+                        <button onClick={() => handleLogout()}>
                           <MenuItem
                             onClick={""}
                             className="flex space-x-2 items-center"

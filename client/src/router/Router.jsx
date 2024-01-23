@@ -19,6 +19,7 @@ import UserProfile from "../pages/dashboard/user/userProfile/UserProfile";
 import SellerDashboard from "../layouts/seller/SellerDashboard";
 import WhiteList from "../pages/dashboard/user/whiteList/WhiteList";
 import About from "../pages/about/About";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -55,7 +56,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboardAdminOnly",
-    element: <AdminDashboard />,
+    element: (
+      <ProtectedRoute>
+        <AdminDashboard />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/dashboardAdminOnly",
@@ -65,7 +70,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/userDashborad",
-    element: <UserDashboard />,
+    element: (
+      <ProtectedRoute>
+        <UserDashboard />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/userDashborad",
@@ -91,7 +100,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboardSellerOnly",
-    element: <SellerDashboard />,
+    element: (
+      <ProtectedRoute>
+        <SellerDashboard />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/dashboardSellerOnly",

@@ -7,7 +7,7 @@ import { useAddToCartMutation } from "../../../redux/features/api/userApi";
 import { useSelector } from "react-redux";
 
 const SingleTrandingToy = ({ ite }) => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth?.userData);
   const { price, image, toyTitle, rating, quantity } = ite;
   const userId = user?._id;
 
@@ -15,7 +15,7 @@ const SingleTrandingToy = ({ ite }) => {
     useAddToCartMutation() || {};
 
   const handleCart = async (pid, qty) => {
-    if (!isAuthenticated) {
+    if (!user) {
       return toast.error("<---- Login first ---->");
     } else {
       addToCart({ userId: userId, item: { id: pid, quantity: qty } });

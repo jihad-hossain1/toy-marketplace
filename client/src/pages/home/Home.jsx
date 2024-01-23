@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "./slider/Slider";
 import Offer from "./offer/Offer";
 import DealOfTheDay from "../../components/sideNavBar/dealOfTheDay/DealOfTheDay";
@@ -11,8 +11,20 @@ import NewArrival from "./newArrival/NewArrival";
 import NewsLetter from "./newsLetter/NewsLetter";
 import Sponser from "./sponser/Sponser";
 import SocialButton from "./social/SocialButton";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "../../redux/features/auth/authSlice";
 
 const Home = () => {
+  const user = useSelector((state) => state.auth?.userData);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user) {
+      console.log("user are not found");
+    }
+    dispatch(getCurrentUser());
+  }, [dispatch]);
   return (
     <div className="">
       <div className="flex space-x-2">
@@ -51,19 +63,18 @@ const Home = () => {
           <div>
             <LatestNews />
           </div>
-          
         </div>
       </div>
       <div className="my-12">
-            <Sponser />
-          </div>
-      
+        <Sponser />
+      </div>
+
       <div className="h-[500px] md:hidden">
         <DealOfTheDay />
       </div>
       <div className="mt-6">
-            <SocialButton />
-          </div>
+        <SocialButton />
+      </div>
     </div>
   );
 };

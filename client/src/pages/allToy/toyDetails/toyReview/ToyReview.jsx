@@ -8,8 +8,8 @@ import { useSelector } from "react-redux";
 
 const ToyReview = ({ pid }) => {
   // const { user } = useContext(AuthContext);
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
-
+  const user = useSelector((state) => state.auth?.userData);
+  
   const [content, setcontent] = useState("");
 
   const [addReview, { isError, isLoading, data, error }] =

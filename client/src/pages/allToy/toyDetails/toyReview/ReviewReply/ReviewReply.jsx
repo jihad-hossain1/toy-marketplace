@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 const ReviewReply = ({ rid, replies, productId }) => {
   // const { user } = useContext(AuthContext);
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+   const user = useSelector((state) => state.auth?.userData);
 
   const [content, setcontent] = useState("");
   const [toggle, setToggle] = useState(false);

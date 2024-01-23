@@ -3,20 +3,18 @@ import { useAddToCartMutation } from "../../../redux/features/api/userApi";
 import { useSelector } from "react-redux";
 
 const AddToCartButton = ({ pid, quantity }) => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
-  const userId = user?._id;
+   const user = useSelector((state) => state.auth?.userData);
+   const userId = user?._id;
 
+   const [addToCart, { data, isError, error, isSuccess }] =
+     useAddToCartMutation() || {};
 
-  const [addToCart, { data, isError, error, isSuccess }] =
-    useAddToCartMutation() || {};
-
-  const handleCart = async (pid, qty) => {
-
-    if (!isAuthenticated) {
-      return toast.error("<---- Login first ---->");
-    }
-    addToCart({ userId: userId, item: { id: pid, quantity: qty } });
-  };
+   const handleCart = async (pid, qty) => {
+     if (!user) {
+       return toast.error("<---- Login first ---->");
+     }
+     addToCart({ userId: userId, item: { id: pid, quantity: qty } });
+   };
 
   if (isError) {
     return toast.error(`${error?.error}`);
