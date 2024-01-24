@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import { getCurrentUser } from "../../redux/features/auth/authSlice";
 
 const UserDashboard = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getCurrentUser());
+  // }, [dispatch]);
 
   return (
     <div className="dark:bg-gray-900 dark:text-gray-50 bg-pink-50/20">

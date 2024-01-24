@@ -60,7 +60,7 @@ const SingleTrandingToy = ({ ite }) => {
           </div>
         </div>
         <div className="flex flex-col justify-center items-center mt-2">
-          <h4 className="text-sm md:text-xl">{toyTitle}</h4>
+          <h4 className="text-sm ">{toyTitle}</h4>
           <Rate disabled defaultValue={rating} className="text-sm" />
           <h4 className="text-sm md:text-md font-semibold">
             <span className="text-blue-gray-600 line-through">

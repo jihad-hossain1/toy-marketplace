@@ -34,12 +34,12 @@ const TopHeader = () => {
     dispatch(userLogout());
   };
 
-  useEffect(() => {
-    if (!user) {
-      console.log("user are not found");
-    }
-    dispatch(getCurrentUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     console.log("user are not found");
+  //   }
+  //   dispatch(getCurrentUser());
+  // }, [dispatch]);
   return (
     <>
       <div className="bg-blue-gray-50 text-gray-700">

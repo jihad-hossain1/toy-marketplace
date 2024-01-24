@@ -55,14 +55,14 @@ const LoginT = () => {
     }
   };
 
-    const user = useSelector((state) => state.auth?.userData);
+    // const user = useSelector((state) => state.auth?.userData);
 
-    useEffect(() => {
-      if (!user) {
-        console.log("user are not found");
-      }
-      dispatch(getCurrentUser());
-    }, [dispatch]);
+    // useEffect(() => {
+    //   if (!user) {
+    //     console.log("user are not found");
+    //   }
+    //   dispatch(getCurrentUser());
+    // }, [dispatch]);
   
   return (
     <>

@@ -7,14 +7,14 @@ import { Link } from "react-router-dom";
 const ProtectedRoute = ({ children }) => {
   const user = useSelector((state) => state.auth?.userData);
   // console.log(user);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!user) {
-      console.log("user are not found");
-    }
-    dispatch(getCurrentUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     console.log("user are not found");
+  //   }
+  //   dispatch(getCurrentUser());
+  // }, [dispatch]);
 
   if (!user) {
     return (
