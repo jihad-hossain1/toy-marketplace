@@ -9,15 +9,13 @@ const ProtectedRoute = ({ children }) => {
   // console.log(user);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getCurrentUser());
-  // }, [dispatch]);
   useEffect(() => {
     if (!user) {
       console.log("user are not found");
     }
     dispatch(getCurrentUser());
   }, [dispatch]);
+
   if (!user) {
     return (
       <div className="flex justify-center items-center min-h-[70vh]">
