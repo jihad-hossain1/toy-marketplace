@@ -3,7 +3,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5000",
   "http://localhost:6000",
-  "https://toy-marketplace-server-ecru.vercel.app",
+  "https://toyproductsserver.vercel.app",
 ];
 
 module.exports = allowedOrigins;
