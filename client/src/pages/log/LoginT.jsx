@@ -14,7 +14,7 @@ import { setUser } from "../../redux/features/auth.sclice";
 import { getCurrentUser, userLogin } from "../../redux/features/auth/authSlice";
 
 const LoginT = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+
 
   const [username, setusername] = useState("");
   const [email, setEmail] = useState("");
@@ -55,6 +55,15 @@ const LoginT = () => {
     }
   };
 
+    const user = useSelector((state) => state.auth?.userData);
+
+    useEffect(() => {
+      if (!user) {
+        console.log("user are not found");
+      }
+      dispatch(getCurrentUser());
+    }, [dispatch]);
+  
   return (
     <>
       <TabPanel value="card" className="p-0">
