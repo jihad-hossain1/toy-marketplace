@@ -15,16 +15,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/features/auth/authSlice";
 
 const Home = () => {
-  const user = useSelector((state) => state.auth?.userData);
+  // const user = useSelector((state) => state.auth?.userData);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!user) {
-      console.log("user are not found");
-    }
-    dispatch(getCurrentUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     console.log("user are not found");
+  //   }
+  //   dispatch(getCurrentUser());
+  // }, [dispatch]);
   return (
     <div className="">
       <div className="flex space-x-2">
