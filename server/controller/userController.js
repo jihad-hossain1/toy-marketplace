@@ -404,7 +404,7 @@ const logoutUser = asyncHandlerPromise(async (req, res) => {
 const getCurrentUser = asyncHandlerPromise(async (req, res) => {
   return res
     .status(200)
-    .json(new ApiResponse(200, req.user, "Current user fetched successfull"));
+    .json({ user: req.user, message: "Current user fetched successfull" });
 });
 
 module.exports = {
