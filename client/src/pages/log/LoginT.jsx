@@ -47,9 +47,9 @@ const LoginT = () => {
 
     if (user && response?.payload) {
       toast.success("Login Successfull");
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+      // setTimeout(() => {
+      //   navigate("/");
+      // }, 2000);
     }
   };
 

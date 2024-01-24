@@ -2,11 +2,6 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const {
-  createUser,
-  getUsers,
-  getUserById,
-  deleteUser,
-  updateUser,
   getUserWithCart,
   addUserCart,
   deleteUserProduct,
@@ -58,21 +53,6 @@ router.route("/users/logout").post(verifyJWT, logoutUser);
 
 router.route("/users/current-user").get(verifyJWT, getCurrentUser);
 
-
-
-
-
-
-
-// router.get("/users", getUsers);
-
-// router.get("/users/:id", getUserById);
-
-// router.put("/users/:id", updateUser);
-
-// router.delete("/users/:id", deleteUser);
-
-// router.post("/create_user", createUser);
 
 
 module.exports = router;
