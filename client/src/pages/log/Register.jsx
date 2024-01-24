@@ -9,7 +9,7 @@ import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useRegisterUserMutation } from "../../redux/features/api/userApi";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/features/auth.sclice";
+// import { setUser } from "../../redux/features/auth.sclice";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ const Register = () => {
   if (isSuccess) {
     toast.success("user account created successfull");
 
-    dispatch(setUser(data?.data));
+    // dispatch(setUser(data?.data));
 
     if (data) {
       navigate("/");

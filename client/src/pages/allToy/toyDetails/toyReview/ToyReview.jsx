@@ -38,7 +38,6 @@ const ToyReview = ({ pid }) => {
   // console.log(data);
   return (
     <TabPanel value={"review"}>
-      <Toaster />
       <div className="min-h-[200px]">
         {/* review or review section  */}
         <hr className="py-4" />

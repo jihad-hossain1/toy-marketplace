@@ -46,7 +46,6 @@ const AdminDashboardHome = () => {
   };
   return (
     <div className="bg-gray-800 min-h-screen text-gray-50">
-      <Toaster />
       <div className="flex gap-4 items-center">
         <button onClick={() => setAddBlog(!addBlog)}>Add Blog</button>
         <button onClick={() => setAddBlog(!addBlog)}>all Blog</button>

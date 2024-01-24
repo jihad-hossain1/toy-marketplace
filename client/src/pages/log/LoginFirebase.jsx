@@ -116,7 +116,6 @@ export const Login = () => {
 
   return (
     <div className="bg-pink-50 min-h-screen px-2 py-4">
-      <Toaster />
       <div className="min-h-screen  flex flex-col justify-center relative overflow-hidden ">
         <div className="max-w-7xl mx-auto">
           <div className="relative group">

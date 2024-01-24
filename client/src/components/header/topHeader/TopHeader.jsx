@@ -16,11 +16,7 @@ import {
 } from "@material-tailwind/react";
 import { Badge } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import {
-  getCurrentUser,
-  userLogout,
-} from "../../../redux/features/auth/authSlice";
+import { userLogout } from "../../../redux/features/auth/authSlice";
 
 const TopHeader = () => {
   const user = useSelector((state) => state.auth?.userData);
@@ -34,12 +30,7 @@ const TopHeader = () => {
     dispatch(userLogout());
   };
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     console.log("user are not found");
-  //   }
-  //   dispatch(getCurrentUser());
-  // }, [dispatch]);
+
   return (
     <>
       <div className="bg-blue-gray-50 text-gray-700">

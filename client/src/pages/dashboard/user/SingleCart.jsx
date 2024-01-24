@@ -27,7 +27,6 @@ const SingleCart = ({ cartitem, productId, quantity }) => {
 
   return (
     <div className="flex justify-between  bg-white p-4 rounded shadow-sm">
-      <Toaster />
       <div className="flex gap-3">
         <div className="flex items-center gap-1 ">
           <Checkbox color="red" />

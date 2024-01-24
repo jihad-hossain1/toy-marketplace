@@ -24,7 +24,6 @@ const AddToCartButton = ({ pid, quantity }) => {
   }
   return (
     <div>
-      <Toaster />
       <div className="space-x-4 mt-4 mb-4">
         <button
           onClick={() => handleCart(pid, 1)}

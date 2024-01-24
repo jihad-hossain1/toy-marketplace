@@ -92,7 +92,6 @@ const CartDrawer = () => {
               {cartsItem?.map((citem) => (
                 <div key={citem?._id}>
                   <div className="flex justify-between space-y-4 items-center border-b border-blue-gray-100 pb-2">
-                    <Toaster />
                     <h4>{citem?.product?.toyTitle}</h4>
                     <DeleteCartItem productId={citem?._id} />
                   </div>

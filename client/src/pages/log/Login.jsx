@@ -9,43 +9,15 @@ import {
   Tab,
 } from "@material-tailwind/react";
 import { FcKey } from "react-icons/fc";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import Register from "./Register";
 import LoginT from "./LoginT";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 export const Login = () => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
-
-  const navigate = useNavigate();
-
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
-  if (isAuthenticated) {
-    return (
-      <div className="flex justify-center min-h-[70vh] items-center">
-        <div className="flex flex-col gap-3">
-          <h4 className="font-semibold text-2xl lg:text-4xl">
-            You are already LoggedIn
-          </h4>
-          <Link
-            className="text-blue-700 font-semibold text-center px-4 py-1 border "
-            to={"/"}
-          >
-            Go Back
-          </Link>
-        </div>
-      </div>
-    );
-  }
   const [type, setType] = useState("card");
 
   return (
     <div className="bg-pink-50 min-h-screen px-2 py-4">
-      <Toaster />
       <div className="min-h-screen  flex flex-col justify-center relative overflow-hidden ">
         <div className="max-w-7xl mx-auto">
           <div className="relative group">

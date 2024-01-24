@@ -94,7 +94,6 @@ const SingleReview = ({ item, refetch }) => {
 
   return (
     <>
-      <Toaster />
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <div className="flex items-center justify-between">
           <span className="text-sm font-light text-blue-gray-600 dark:text-gray-400 ">
@@ -125,22 +124,20 @@ const SingleReview = ({ item, refetch }) => {
           >
             {/* TODO --> review Update & delete  */}
             <Tooltip content="Edit review">
-              <IconButton onClick={()=>openModal(item)} variant="text">
+              <IconButton onClick={() => openModal(item)} variant="text">
                 <PencilIcon className="h-4 w-4" />
               </IconButton>
             </Tooltip>
 
-           <Tooltip content="dlete review">
-           <IconButton
+            <Tooltip content="dlete review">
+              <IconButton
                 onClick={() => handleDeletereview(item)}
                 variant="text"
               >
                 <TrashIcon className="h-4 w-4 text-pink-800" />
               </IconButton>
+            </Tooltip>
 
-           </Tooltip>
-              
-            
             {/* TODO --> review Update & delete  */}
           </div>
 
@@ -154,62 +151,61 @@ const SingleReview = ({ item, refetch }) => {
               {userNaem}
             </p>
           </div>
-         
         </div>
       </div>
-          {/* modal components  */}
-      <dialog ref={modalRef} className='w-[90%] max-w-[500px] rounded-md px-3 pt-2 pb-5'>
+      {/* modal components  */}
+      <dialog
+        ref={modalRef}
+        className="w-[90%] max-w-[500px] rounded-md px-3 pt-2 pb-5"
+      >
         <div>
-        <div className='text-right mb-2'>
-          <button
-            onClick={() => {
-              closeModal();
-              
-            }}
-            className='hover:text-pink-600 p-2'
-          >
-            Close
-          </button>
-        </div>
+          <div className="text-right mb-2">
+            <button
+              onClick={() => {
+                closeModal();
+              }}
+              className="hover:text-pink-600 p-2"
+            >
+              Close
+            </button>
+          </div>
           <form ref={formRef} action="" onSubmit={handleUpdate}>
-          <h4 className='text-2xl font-semibold text-center text-blue-gray-700 mb-5'>
+            <h4 className="text-2xl font-semibold text-center text-blue-gray-700 mb-5">
               Update Your review
             </h4>
-              <div className='mb-4'>
-                <Input
+            <div className="mb-4">
+              <Input
                 readOnly
-                  
-                  type='text'
-                  className='w-full'
-                  color='teal'
-                  name='reviewUserName'
-                  label='Your Name'
-                  defaultValue={updateData?.reviewUser}
-                />
-              </div>
-              <div className='mb-4'>
-                <Textarea
-                  required
-                  type='text'
-                  className='w-full'
-                  color='teal'
-                  name='reviewUserreview'
-                  label='Your review '
-                  defaultValue={updateData?.review}
-                />
-              </div>
-              <div>
-                <Button
-                  className='w-full'
-                 
-                  type='submit'
-                  color='teal'
-                  variant='outlined'
-                >
-                  {" "}
-                  Update review{" "}
-                </Button>
-              </div>
+                type="text"
+                className="w-full"
+                color="teal"
+                name="reviewUserName"
+                label="Your Name"
+                defaultValue={updateData?.reviewUser}
+              />
+            </div>
+            <div className="mb-4">
+              <Textarea
+                required
+                type="text"
+                className="w-full"
+                color="teal"
+                name="reviewUserreview"
+                label="Your review "
+                defaultValue={updateData?.review}
+              />
+            </div>
+            <div>
+              <Button
+                className="w-full"
+                type="submit"
+                color="teal"
+                variant="outlined"
+              >
+                {" "}
+                Update review{" "}
+              </Button>
+            </div>
           </form>
         </div>
       </dialog>

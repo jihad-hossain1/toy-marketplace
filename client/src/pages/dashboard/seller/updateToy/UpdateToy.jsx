@@ -62,7 +62,6 @@ const UpdateToy = ({ ite }) => {
   };
   return (
     <>
-      <Toaster />
       <MenuItem
         onClick={() => openModal(ite)}
         className="flex space-x-3 items-center"

@@ -32,7 +32,6 @@ const SingleCard = ({ card }) => {
   return (
     <div>
       <div className="group">
-        <Toaster />
         <div className="relative overflow-hidden flex justify-center">
           <div
             className={

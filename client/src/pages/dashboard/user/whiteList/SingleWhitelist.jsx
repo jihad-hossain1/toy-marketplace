@@ -8,7 +8,7 @@ const SingleWhitelist = () => {
   return (
     <div>
       {/* <div className="group">
-        <Toaster />
+        
 
         <div className="relative overflow-hidden">
           <div

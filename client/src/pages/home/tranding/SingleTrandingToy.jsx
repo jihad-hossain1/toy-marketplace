@@ -31,8 +31,6 @@ const SingleTrandingToy = ({ ite }) => {
   return (
     <div className="max-w-[300]">
       <div className="group">
-        <Toaster />
-
         <div className="relative overflow-hidden">
           <img src={image} alt="" />
 

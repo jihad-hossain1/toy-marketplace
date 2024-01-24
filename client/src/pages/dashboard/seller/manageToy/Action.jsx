@@ -46,7 +46,6 @@ const Action = ({ ite }) => {
 
   return (
     <>
-      <Toaster />
       <Menu>
         <MenuHandler>
           <IconButton variant="text">

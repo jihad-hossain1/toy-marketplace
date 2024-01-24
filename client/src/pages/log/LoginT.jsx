@@ -1,21 +1,16 @@
 import { Button, Input, TabPanel, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
-import { useUserLoginMutation } from "../../redux/features/api/userApi";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { useSavedUserLoginMutation } from "../../redux/features/api/authApi";
-import { setUser } from "../../redux/features/auth.sclice";
 import { getCurrentUser, userLogin } from "../../redux/features/auth/authSlice";
 
 const LoginT = () => {
-
-
   const [username, setusername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,19 +46,13 @@ const LoginT = () => {
     const user = await dispatch(getCurrentUser());
 
     if (user && response?.payload) {
-      navigate("/");
+      toast.success("Login Successfull");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
   };
 
-    // const user = useSelector((state) => state.auth?.userData);
-
-    // useEffect(() => {
-    //   if (!user) {
-    //     console.log("user are not found");
-    //   }
-    //   dispatch(getCurrentUser());
-    // }, [dispatch]);
-  
   return (
     <>
       <TabPanel value="card" className="p-0">
@@ -92,7 +81,6 @@ const LoginT = () => {
           <div className="flex my-4">
             <Input
               value={password}
-              // value={formData.password}
               onChange={(e) => setPassword(e.target.value)}
               required
               type={typeOfPassword}

@@ -14,7 +14,6 @@ const NewsLetter = () => {
   }
   return (
     <div className="bg-blue-gray-50 bg-opacity-50 rounded-lg p-2 md:p-5">
-      <Toaster />
       <div>
         <div className="font-extrabold uppercase text-center md:text-start mb-5  border-b border-blue-gray-200  pb-4  flex space-x-4 items-center">
           <div className="bg-[#fc82bd] drop-shadow shadow-md rounded-full w-3 h-3"></div>
@@ -34,10 +33,22 @@ const NewsLetter = () => {
         <div className="mt-4">
           <form action="" onSubmit={handleSubmit}>
             <div className="mb-3">
-            <Input label="Your Email" name="email" type="email" required className="" color="pink" />
+              <Input
+                label="Your Email"
+                name="email"
+                type="email"
+                required
+                className=""
+                color="pink"
+              />
             </div>
             <div className="mb-3">
-            <Button type="submit"   className='bg-[#f0c507] px-2 py-2 w-full md:px-4 md:py-2 rounded-lg text-black text-xs md:text-[14px] inline-block uppercase hover:bg-[#fc82bd] hover:text-white transition-all duration-500'>subscribe</Button>
+              <Button
+                type="submit"
+                className="bg-[#f0c507] px-2 py-2 w-full md:px-4 md:py-2 rounded-lg text-black text-xs md:text-[14px] inline-block uppercase hover:bg-[#fc82bd] hover:text-white transition-all duration-500"
+              >
+                subscribe
+              </Button>
             </div>
           </form>
         </div>

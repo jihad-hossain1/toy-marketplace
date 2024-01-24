@@ -100,7 +100,6 @@ const AddToy = () => {
   // console.log(error);
   return (
     <div>
-      <Toaster />
       <div>
         <h4 className="text-xl text-center font-bold underline text-blue-gray-800 mb-4 md:mb-8">
           Add Your Toy

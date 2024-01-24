@@ -1,21 +1,16 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from "../redux/features/auth/authSlice";
-import NotLoginPage from "./NotLoginPage";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
   const user = useSelector((state) => state.auth?.userData);
-  // console.log(user);
-  // const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth?.loading);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     console.log("user are not found");
-  //   }
-  //   dispatch(getCurrentUser());
-  // }, [dispatch]);
-
+  if (loading)
+    return (
+      <div className="flex justify-center items-center min-h-[70vh] ">
+        <h4 className="text-2xl">Loading....</h4>
+      </div>
+    );
   if (!user) {
     return (
       <div className="flex justify-center items-center min-h-[70vh]">
@@ -32,7 +27,6 @@ const ProtectedRoute = ({ children }) => {
   } else {
     return children;
   }
-  // !user ? <NotLoginPage /> : children;
 };
 
 export default ProtectedRoute;
