@@ -3,6 +3,7 @@ const Product = require("../models/Product");
 const ProductDetail = require("../models/ProductDetail");
 const Review = require("../models/Review");
 
+
 const getProductByEmail = async (req, res) => {
   const email = req.params?.email;
   // console.log(email);
@@ -64,6 +65,8 @@ const createProduct = async (req, res) => {
   }
 };
 
+
+
 const getProducts_page = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 20;
@@ -90,36 +93,6 @@ const getProducts_page = async (req, res) => {
       .status(401)
       .json({ message: "problem wiht geting blogs from server", error: error });
   }
-  // const page = parseInt(req.query.page) || 1;
-  // const perPage = parseInt(req.query.perPage) || 10;
-  // const filters = {};
-
-  // Handle filters
-  // if (req.query.rating) {
-  //   filters.rating = parseInt(req.query.rating);
-  // }
-
-  // if (req.query.category) {
-  //   filters.category = req.query.category;
-  // }
-
-  // // Assuming your product schema has a 'price' field
-  // if (req.query.sortBy === "price") {
-  //   const sortOrder = req.query.sortOrder === "desc" ? -1 : 1;
-  //   filters.price = { $exists: true }; // Exclude products without a price
-  //   // Sort by price
-  //   const products = await Product.find(filters)
-  //     .sort({ price: sortOrder })
-  //     .skip((page - 1) * perPage)
-  //     .limit(perPage);
-  //   res.json(products);
-  // } else {
-  //   // Default behavior without sorting by price
-  //   const products = await Product.find(filters)
-  //     .skip((page - 1) * perPage)
-  //     .limit(perPage);
-  //   res.json(products);
-  // }
 };
 
 const deleteProductDetailsReview = async (req, res) => {
@@ -174,14 +147,12 @@ const deleteProductDetailsReviewEmail = async (req, res) => {
         // // Delete the product itself
         const deleteProduct = await Product.findByIdAndDelete(id);
         // console.log(deleteProduct);
-        res
-          .status(200)
-          .json({
-            message: "product delete Succcessfull",
-            deleteProduct,
-            deleteDeteial,
-            deleteReview,
-          });
+        res.status(200).json({
+          message: "product delete Succcessfull",
+          deleteProduct,
+          deleteDeteial,
+          deleteReview,
+        });
         // res.json(product);
       } else {
         res.status(404).json({ error: "you are not author this product," });

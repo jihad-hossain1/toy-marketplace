@@ -39,10 +39,10 @@ const ManageBlogs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(formData);
-    console.log({ ...formData, contents: { content: details } });
+    // console.log({ ...formData, contents: { content: details } });
     createBlog({ ...formData, contents: { content: details } });
     toast.success("blog added");
-    console.log(data);
+    // console.log(data);
   };
   return (
     <div className="bg-gray-800 min-h-screen text-gray-50">

@@ -10,6 +10,7 @@ const commentsRoute = require("./routes/commentsRoute");
 const productRoute = require("./routes/productRoute");
 const reviewRoute = require("./routes/reviewRoute");
 const blogRoute = require("./routes/blogRoute");
+const productCategory = require("./routes/productCategoryRoutes");
 const corsOptions = require("./config/cors.options");
 const credentials = require("./middleware/credentials");
 
@@ -45,6 +46,7 @@ app.use("/api", commentsRoute);
 app.use("/api", productRoute);
 app.use("/api", reviewRoute);
 app.use("/api", blogRoute);
+app.use("/api", productCategory);
 
 app.get("/", (req, res) => {
   res.send("api runing");

@@ -38,6 +38,7 @@ const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["products"],
     }),
+
     productDeleteByAdmin: builder.mutation({
       query: ({ id }) => ({
         url: `/api/products/${id}`,
