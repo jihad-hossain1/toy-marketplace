@@ -20,14 +20,15 @@ const data =[
 ]
 const Offer = () => {
     return (
-        <div className='flex flex-col justify-center items-center sm:grid sm:grid-cols-2 md:grid-cols-4 gap-3'>
-            {
-                data.map((item,index)=><Link to={item?.link} key={index}>
-                <div  className='bg-white rounded-md p-2'>
-                    <img src={item?.img} className='object-cover rounded-lg' alt="" />
-                </div></Link>)
-            }
-        </div>
+      <div className=" justify-center items-center grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {data.map((item, index) => (
+          <Link to={item?.link} key={index}>
+            <div className="bg-white rounded-md p-2">
+              <img src={item?.img} className="object-cover rounded-lg" alt="" />
+            </div>
+          </Link>
+        ))}
+      </div>
     );
 };
 

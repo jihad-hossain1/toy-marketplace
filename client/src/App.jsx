@@ -23,6 +23,8 @@ import WhiteList from "./pages/dashboard/user/whiteList/WhiteList";
 import UserDashboard from "./layouts/user/UserDashboard";
 import AddToy from "./pages/dashboard/seller/addToy/AddToy";
 import ManageToy from "./pages/dashboard/seller/manageToy/ManageToy";
+import ToyManage from "./pages/dashboard/admin/ToyManage/ToyManage";
+import ManageBlogs from "./pages/dashboard/admin/ManageBlogs/ManageBlogs";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +56,11 @@ function App() {
           }
         >
           <Route path="/dashboardAdminOnly" element={<AdminDashboardHome />} />
+          <Route path="/dashboardAdminOnly/toyManage" element={<ToyManage />} />
+          <Route
+            path="/dashboardAdminOnly/blogManage"
+            element={<ManageBlogs />}
+          />
         </Route>
 
         {/* Seller Routes  */}
