@@ -1,6 +1,7 @@
 import React from "react";
 import Action from "./Action";
 import { useGetProductCategoryQuery } from "../../../../redux/features/api/productCategoryApi";
+import UpdateCategory from "./UpdateCategory";
 
 const ToyManage = () => {
   const { data, isLoading, isError, error } =
@@ -17,7 +18,11 @@ const ToyManage = () => {
           <div>Loading...</div>
         ) : (
           data?.map((category) => (
-            <li key={category?._id}>{category?.category}</li>
+            <li key={category?._id} className="flex gap-2 items-center">
+              {category?.category}
+
+              <UpdateCategory category={category} />
+            </li>
           ))
         )}
       </ul>

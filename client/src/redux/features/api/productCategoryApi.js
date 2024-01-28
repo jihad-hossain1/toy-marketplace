@@ -16,11 +16,12 @@ const productCategoryApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["category"],
     }),
+
     updateProductCategory: builder.mutation({
-      query: ({ id, category }) => ({
+      query: ({ id, data }) => ({
         url: `/api/productCategory/${id}`,
         method: "PUT",
-        body: category,
+        body: data,
       }),
       invalidatesTags: ["category"],
     }),

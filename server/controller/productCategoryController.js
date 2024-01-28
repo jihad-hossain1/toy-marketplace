@@ -38,9 +38,10 @@ const getProductCategories = async (req, res) => {
 const updateProductCategories = async (req, res) => {
   // console.log(req.body.category);
   try {
-    const { id } = req.params;
+    const id = req.params.id;
     const { category } = req.body;
-    // console.log(id);
+    console.log(req.body);
+    console.log(id);
     if (!id) {
       return res
         .status(403)
