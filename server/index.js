@@ -20,16 +20,16 @@ const app = express();
 
 app.use(cookieParser());
 
-app.use(credentials);
+// app.use(credentials);
 
-app.use(cors(corsOptions));
-// app.use(
-//   cors({
-//     origin: originOption || process.env.CORS_ORIGIN,
-//     credentials: true,
-//     // origin: "http://localhost:3000",
-//   })
-// );
+// app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin:  process.env.CORS_ORIGIN,
+    credentials: true,
+    // origin: "http://localhost:3000",
+  })
+);
 
 app.use(express.json());
 

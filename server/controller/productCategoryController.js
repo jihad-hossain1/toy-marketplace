@@ -40,8 +40,7 @@ const updateProductCategories = async (req, res) => {
   try {
     const id = req.params.id;
     const { category } = req.body;
-    console.log(req.body);
-    console.log(id);
+   
     if (!id) {
       return res
         .status(403)
@@ -51,6 +50,9 @@ const updateProductCategories = async (req, res) => {
 
     if (existCategory) {
       return res.status(400).json({ error: "categroy name already exist" });
+    }
+    if (category == "") {
+      return res.status(400).json({ error: "categroy fill required" });
     }
 
     const updatedCategory = await Category.findByIdAndUpdate(id, {
