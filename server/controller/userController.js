@@ -389,11 +389,9 @@ const logoutUser = asyncHandlerPromise(async (req, res) => {
     .json(new ApiResponse(200, {}, "user successfully loggedOut ..."));
 });
 
-const getCurrentUser = asyncHandlerPromise(async (req, res) => {
-  return res
-    .status(200)
-    .json(new ApiResponse(200, req.user, "Current user fetched successfull"));
-});
+const getCurrentUser = async (req, res) => {
+  return res.status(200).json(req.user);
+};
 
 module.exports = {
   createUser,
