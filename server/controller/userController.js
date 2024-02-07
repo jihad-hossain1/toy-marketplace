@@ -52,6 +52,7 @@ const getUserWithCart = async (req, res) => {
     const user = await User.findById(req.params.userId).populate(
       "cart.product"
     );
+    console.log(user);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -150,26 +151,7 @@ const increaseCartProduct = async (req, res) => {
         .status(404)
         .json({ error: "Product not found in the user's cart" });
     }
-    // let product;
-    // try {
-    //   product = await Product.findById(productId);
-    //   if (!product) {
-    //     throw new Error("Product not found");
-    //   }
-    // } catch (productError) {
-    //   console.error("Error finding product:", productError);
-    //   return res.status(404).json({ error: "Product not found" });
-    // }
-    // if (!product) {
-    //   return res.status(404).json({ error: "Product not found" });
-    // }
 
-    // if (product?.quantity < cartItem?.quantity + 1) {
-    //   return res
-    //     .status(400)
-    //     .json({ error: "Insufficient stock to increase quantity" });
-    // }
-    // Increase the quantity by 1
     cartItem.quantity += 1;
 
     await user.save();
@@ -353,12 +335,18 @@ const loginUser = asyncHandlerPromise(async (req, res) => {
   const loggedInUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
+  // for development
+  // const options = {
+  //   httpOnly: true,
+  //   secure: true,
+  // };
 
+  // for deployment uncomment this
   const options = {
-    httpOnly: true,
+    httpOnly: false,
+    sameSite: "none",
     secure: true,
   };
-
   return res
     .status(200)
     .cookie("accessToken", accessToken, options)

@@ -22,14 +22,16 @@ app.use(cookieParser());
 
 // app.use(credentials);
 
-// app.use(cors(corsOptions));
 app.use(
-  cors({
-    origin:  process.env.CORS_ORIGIN,
-    credentials: true,
-    // origin: "http://localhost:3000",
-  })
+  cors({ credentials: true, origin: true, exposedHeaders: ["Set-Cookie"] })
 );
+// app.use(
+//   cors({
+//     origin:  process.env.CORS_ORIGIN,
+//     credentials: true,
+//     // origin: "http://localhost:3000",
+//   })
+// );
 
 app.use(express.json());
 

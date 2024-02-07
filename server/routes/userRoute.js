@@ -52,6 +52,7 @@ router.route("/users/login").post(loginUser);
 router.route("/users/logout").post(verifyJWT, logoutUser);
 
 router.route("/users/current-user").get(verifyJWT, getCurrentUser);
+router.route("/users/current-user").get(getCurrentUser);
 
 
 
