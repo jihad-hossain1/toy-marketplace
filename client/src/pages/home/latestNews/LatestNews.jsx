@@ -37,7 +37,7 @@ const LatestNews = () => {
             !isLoading &&
             newses?.map((item, index) => (
               <div key={index} className="mt-3">
-                <SwiperSlide>
+                <SwiperSlide key={index}>
                   <Link to={"/blogs"}>
                     <div className="max-w-[300px] h-56 group-hover:scale-110 transition-all duration-1000 rounded-lg">
                       <img className="rounded-lg" src={item?.image} alt="" />

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const connectDatabase = async () => {
   try {
     const connectionInstance = await mongoose.connect(
-      `${process.env.MONGODB_URI}`
+      `${process.env.MONGODB_URI}/AnimalToy`
     );
     console.log(
       `\n <------ database connection successfull ------> host: ${connectionInstance.connection.host}`
