@@ -11,45 +11,46 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, userLogin } from "../../redux/features/auth/authSlice";
 
 const LoginT = () => {
-  const [username, setusername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const loading = useSelector((state) => state.auth?.loading);
 
-  const navigate = useNavigate();
+    const [username, setusername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-  const [typeOfPassword, setTypeOfPassword] = useState("password");
-  const [iconEye, setIconEye] = useState(eyeOff);
-  const handlePasswordShowToggle = () => {
-    if (typeOfPassword === "password") {
-      setIconEye(eye);
-      setTypeOfPassword("text");
-    } else {
-      setIconEye(eyeOff);
-      setTypeOfPassword("password");
-    }
-  };
+    const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  const loading = useSelector((state) => state.auth?.loading);
+    const [typeOfPassword, setTypeOfPassword] = useState("password");
+    const [iconEye, setIconEye] = useState(eyeOff);
 
-  const handleSubmitsLogIn = async (e) => {
-    e.preventDefault();
-
-    const data = {
-      email,
-      password,
-      username,
+    const handlePasswordShowToggle = () => {
+      if (typeOfPassword === "password") {
+        setIconEye(eye);
+        setTypeOfPassword("text");
+      } else {
+        setIconEye(eyeOff);
+        setTypeOfPassword("password");
+      }
     };
 
-    const response = await dispatch(userLogin(data));
+    const handleSubmitsLogIn = async (e) => {
+      e.preventDefault();
 
-    const user = await dispatch(getCurrentUser());
+      const data = {
+        email,
+        password,
+        username,
+      };
 
-    if (user && response?.payload) {
-      toast.success("Login Successfull");
-       navigate("/");
-    }
-  };
+      const response = await dispatch(userLogin(data));
+
+const user = await dispatch(getCurrentUser());
+
+if (user && response?.payload) {
+  toast.success("Login Successfull");
+  navigate("/");
+}
+    };
 
   return (
     <>
