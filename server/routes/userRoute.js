@@ -18,17 +18,21 @@ const verifyJWT = require("../middleware/auth.middleware");
 
 const router = express.Router();
 
-router.get("/users/:userId/cart", getUserWithCart);
+router.route("/users/:userId/cart").get(getUserWithCart);
 
-router.post("/users/create-payment-intent", paymentByStripe);
+router.route("/users/create-payment-intent").post(paymentByStripe);
 
-router.post("/users/:userId/cart", addUserCart);
+router.route("/users/:userId/cart").post(addUserCart);
 
-router.post("/users/:userId/cart/increase_cart_product", increaseCartProduct);
+router
+  .route("/users/:userId/cart/increase_cart_product")
+  .post(increaseCartProduct);
 
-router.post("/users/:userId/cart/decrease_cart_product", decreaseCartProduct);
+router
+  .route("/users/:userId/cart/decrease_cart_product")
+  .post(decreaseCartProduct);
 
-router.delete("/users/:userId/:productId", deleteUserProduct);
+router.route("/users/:userId/:productId").delete(deleteUserProduct);
 
 
 router.route("/users/register").post(

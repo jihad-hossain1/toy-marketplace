@@ -1,32 +1,36 @@
-const jwt = require("jsonwebtoken");
+const JWT = require("jsonwebtoken");
 const User = require("../models/User");
-const { asyncHandlerPromise } = require("../utils/asyncHandler");
 
-const verifyJWT = asyncHandlerPromise(async (req, res, next) => {
+const verifyJWT = async (req, res, next) => {
   try {
-    const token =
+    const accessToken =
       req.cookies?.accessToken ||
       req.header("Authorization" || "authorization")?.replace("Bearer ", "");
 
-    if (!token) {
-      return res.status(401).json({ error: "unauthorized requiest" });
+    if (!accessToken) {
+      return res.status(401).json({ message: "Unauthorized request" });
     }
 
-    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const decodedToken = JWT.verify(
+      accessToken,
+      process.env.ACCESS_TOKEN_SECRET
+    );
 
     const user = await User.findById(decodedToken?._id).select(
-      "-password -refreshToken"
+      " -password -refreshToken"
     );
 
     if (!user) {
-      return res.status(401).json({ error: "Invalid access token" });
+      return res.status(401).json({ message: "Invalid access token" });
     }
 
     req.user = user;
     next();
   } catch (error) {
-    return res.status(401).json(error?.message || "invalid access token");
+    return res
+      .status(401)
+      .json({ error: error?.message, message: "Invalid access token" });
   }
-});
+};
 
 module.exports = verifyJWT;
