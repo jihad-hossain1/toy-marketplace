@@ -6,7 +6,7 @@ import { PencilIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
-import { AuthContext } from "../../../../authentication/AuthProvider";
+
 import { useSelector } from "react-redux";
 
 
@@ -15,7 +15,7 @@ const SingleReview = ({ item, refetch }) => {
   const modalRef = useRef(null);
   const formRef = useRef(null);
   const [updateData, setUpdateData] = useState(null);
-  // const { user } = useContext(AuthContext);
+
     const user = useSelector((state) => state.auth?.userData);
   const {
     review,

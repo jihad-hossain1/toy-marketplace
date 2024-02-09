@@ -1,6 +1,5 @@
 import { Button } from "@material-tailwind/react";
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../../../../authentication/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { useAddProductMutation } from "../../../../redux/features/api/productApi";
 import SingleInformation from "./SingleInformation";
