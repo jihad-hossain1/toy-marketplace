@@ -364,7 +364,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-const logoutUser = asyncHandlerPromise(async (req, res) => {
+const logoutUser = async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
@@ -377,8 +377,15 @@ const logoutUser = asyncHandlerPromise(async (req, res) => {
     }
   );
 
+  // development only
+  // const options = {
+  //   httpOnly: true,
+  //   secure: true,
+  // };
+  // for production
   const options = {
-    httpOnly: true,
+    httpOnly: false,
+    sameSite: "none",
     secure: true,
   };
 
@@ -386,8 +393,8 @@ const logoutUser = asyncHandlerPromise(async (req, res) => {
     .status(200)
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, {}, "user successfully loggedOut ..."));
-});
+    .json({ message: "user successfully loggedOut ..." });
+};
 
 const getCurrentUser = async (req, res) => {
   return res.status(200).json(req.user);
