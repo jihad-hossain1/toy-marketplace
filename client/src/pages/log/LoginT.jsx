@@ -11,46 +11,49 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, userLogin } from "../../redux/features/auth/authSlice";
 
 const LoginT = () => {
-    const dispatch = useDispatch();
-    const loading = useSelector((state) => state.auth?.loading);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth?.loading);
 
-    const [username, setusername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [username, setusername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [typeOfPassword, setTypeOfPassword] = useState("password");
-    const [iconEye, setIconEye] = useState(eyeOff);
+  const [typeOfPassword, setTypeOfPassword] = useState("password");
+  const [iconEye, setIconEye] = useState(eyeOff);
 
-    const handlePasswordShowToggle = () => {
-      if (typeOfPassword === "password") {
-        setIconEye(eye);
-        setTypeOfPassword("text");
-      } else {
-        setIconEye(eyeOff);
-        setTypeOfPassword("password");
-      }
+  const handlePasswordShowToggle = () => {
+    if (typeOfPassword === "password") {
+      setIconEye(eye);
+      setTypeOfPassword("text");
+    } else {
+      setIconEye(eyeOff);
+      setTypeOfPassword("password");
+    }
+  };
+
+  const handleSubmitsLogIn = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      email,
+      password,
+      username,
     };
 
-    const handleSubmitsLogIn = async (e) => {
-      e.preventDefault();
+    const response = await dispatch(userLogin(data));
 
-      const data = {
-        email,
-        password,
-        username,
-      };
+    const user = await dispatch(getCurrentUser());
 
-      const response = await dispatch(userLogin(data));
-
-const user = await dispatch(getCurrentUser());
-
-if (user && response?.payload) {
-  toast.success("Login Successfull");
-  navigate("/");
-}
-    };
+    // toast.success("Login Successfull");
+    // navigate("/");
+    console.log(response?.payload);
+    if (user && response?.payload) {
+      toast.success("Login Successfull");
+      navigate("/");
+    }
+  };
 
   return (
     <>
