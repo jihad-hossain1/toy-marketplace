@@ -13,7 +13,6 @@ const {
   logoutUser,
   getCurrentUser,
 } = require("../controller/userController");
-const { upload } = require("../middleware/multer.middleware");
 const verifyJWT = require("../middleware/auth.middleware");
 
 const router = express.Router();
@@ -34,20 +33,7 @@ router
 
 router.route("/users/:userId/:productId").delete(deleteUserProduct);
 
-
-router.route("/users/register").post(
-  upload.fields([
-    {
-      name: "avatar",
-      maxCount: 1,
-    },
-    {
-      name: "coverImage",
-      maxCount: 1,
-    },
-  ]),
-  registerUser
-);
+router.route("/users/register").post(registerUser);
 
 router.route("/users/login").post(loginUser);
 
@@ -56,8 +42,6 @@ router.route("/users/login").post(loginUser);
 router.route("/users/logout").post(verifyJWT, logoutUser);
 
 router.route("/users/current-user").get(verifyJWT, getCurrentUser);
-router.route("/users/current-user").get(getCurrentUser);
-
 
 
 module.exports = router;

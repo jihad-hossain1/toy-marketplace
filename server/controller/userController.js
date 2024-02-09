@@ -1,12 +1,10 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Product = require("../models/Product");
-const dotenv = require("dotenv");
 const { asyncHandlerPromise } = require("../utils/asyncHandler");
 const { ApiResponse } = require("../utils/ApiResponse");
 const { ApiError } = require("../utils/ApiError");
-const { uploadOnCloudinary } = require("../utils/cloudinary");
-dotenv.config();
+
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const generateAccessAndRefreshTokens = async (userId) => {
