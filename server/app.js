@@ -18,13 +18,13 @@ app.use(cookieParser());
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
 // const reviewRoute = require("./routes/reviewRoute");
-// const blogRoute = require("./routes/blogRoute");
+const blogRoute = require("./routes/blogRoute");
 // const productCategory = require("./routes/productCategoryRoutes");
 
 app.use("/api", userRoute);
 app.use("/api", productRoute);
 // app.use("/api", reviewRoute);
-// app.use("/api", blogRoute);
+app.use("/api", blogRoute);
 // app.use("/api", productCategory);
 
 module.exports = app;
