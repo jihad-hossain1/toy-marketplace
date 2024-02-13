@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.route("/products/:productId/createReview").post(createReview);
 
-router.route("/products/:productId/reviews").post(getAllReviews);
+router.route("/products/:productId/reviews").get(getAllReviews);
 
 router.route("/products/:reviewId/reply").put(reviewWithReply);
 

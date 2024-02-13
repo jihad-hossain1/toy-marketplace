@@ -58,6 +58,8 @@ const getAllReviews = async (req, res) => {
   // const id = req.body?.taskId;
   const id = req.params?.productId;
 
+  console.log(id);
+
   try {
     if (id) {
       const reviews = await Review.find({ productId: id }).sort({

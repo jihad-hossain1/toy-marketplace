@@ -5,7 +5,7 @@ import ReviewReply from "./ReviewReply/ReviewReply";
 import ReviewAction from "./ReviewAction";
 
 const FetchAllReview = ({ productId }) => {
-  //   console.log("form fetch rev: ", productId);
+  // console.log("form fetch rev: ", productId);
   const {
     data: reviews,
     isError: isreviewError,
@@ -14,6 +14,7 @@ const FetchAllReview = ({ productId }) => {
   } = useGetAllReviewByProductQuery(productId) || {};
 
   isreviewError ? <div>{reviewError?.message}</div> : "";
+  console.log(reviews);
   return (
     <>
       <>
