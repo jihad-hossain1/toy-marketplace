@@ -15,6 +15,7 @@ import {
   useUpdateReviewMutation,
 } from "../../../../redux/features/api/reviewApi";
 import ModalForAll from "../../../../components/ModalForAll/ModalForAll";
+import toast from "react-hot-toast";
 
 const ReviewAction = ({ review, productId }) => {
   const [open, setOpen] = useState(false);
@@ -36,7 +37,7 @@ const ReviewAction = ({ review, productId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(content);
+    // console.log(content);
     updateReview({
       productId: productId,
       reviewId: review?._id,

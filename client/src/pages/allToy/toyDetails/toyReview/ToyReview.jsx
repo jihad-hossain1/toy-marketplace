@@ -1,5 +1,5 @@
 import { Button, TabPanel, Textarea } from "@material-tailwind/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAddReviewMutation } from "../../../../redux/features/api/reviewApi";
 import FetchAllReview from "./FetchAllReview";
@@ -13,7 +13,7 @@ const ToyReview = ({ pid }) => {
   const [addReview, { isError, isLoading, data, error }] =
     useAddReviewMutation() || {};
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!user) {
@@ -27,13 +27,18 @@ const ToyReview = ({ pid }) => {
         content,
       },
     });
-    toast.success("your reivew added successfull");
-    setcontent("");
+
     // setIsReviewToggle(false);
     // console.log(isReview);
   };
+  if (isError) {
+    toast.error(error?.data?.error?.message);
+  }
+  if (data?._id) {
+    toast.success("your reivew added successfull");
+    // setcontent("");
+  }
 
-  // console.log(data);
   return (
     <TabPanel value={"review"}>
       <div className="min-h-[200px]">

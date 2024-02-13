@@ -14,7 +14,7 @@ const FetchAllReview = ({ productId }) => {
   } = useGetAllReviewByProductQuery(productId) || {};
 
   isreviewError ? <div>{reviewError?.message}</div> : "";
-  console.log(reviews);
+  // console.log(reviews);
   return (
     <>
       <>
