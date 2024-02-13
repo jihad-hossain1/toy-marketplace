@@ -6,7 +6,6 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
-import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, userLogin } from "../../redux/features/auth/authSlice";
 
@@ -44,13 +43,11 @@ const LoginT = () => {
 
     const response = await dispatch(userLogin(data));
 
-    const user = await dispatch(getCurrentUser());
+    await dispatch(getCurrentUser());
 
-    // toast.success("Login Successfull");
-    // navigate("/");
-    console.log(response?.payload);
-    if (user && response?.payload) {
-      toast.success("Login Successfull");
+    const result = await response?.type;
+
+    if (result == "login/fulfilled") {
       navigate("/");
     }
   };

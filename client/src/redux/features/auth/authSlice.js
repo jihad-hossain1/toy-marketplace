@@ -10,11 +10,13 @@ const initialState = {
 
 export const createAccount = createAsyncThunk("register", async (data) => {
   try {
+    console.log(data);
     const response = await axiosInstance.post("/users/register", data);
+    console.log("response from axios ", response);
     toast.success("Registered successfully!!!");
     return response.data;
   } catch (error) {
-    toast.error(error?.response?.data?.message);
+    toast.error(error?.response?.data?.error);
     console.log(error);
     throw error;
   }

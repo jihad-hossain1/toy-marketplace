@@ -75,7 +75,7 @@ const TopHeader = () => {
                   <MenuList>
                     {user ? (
                       <>
-                        <Link to={"/"}>
+                        <Link to={"/userDashborad/profile"}>
                           <MenuItem className="flex space-x-2 items-center">
                             <Avatar
                               size="sm"

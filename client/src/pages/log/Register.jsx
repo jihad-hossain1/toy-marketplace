@@ -1,24 +1,22 @@
 import { Button, Input, TabPanel, Typography } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
-import { useRegisterUserMutation } from "../../redux/features/api/userApi";
-import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-// import { setUser } from "../../redux/features/auth.sclice";
+import { createAccount } from "../../redux/features/auth/authSlice";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [registerUser, { data, isError, isLoading, isSuccess, error }] =
-    useRegisterUserMutation() || {};
-
   const [typeOfPassword, setTypeOfPassword] = useState("password");
   const [iconEye, setIconEye] = useState(eyeOff);
+  const [response, setResponse] = useState();
+
   const handlePasswordShowToggle = () => {
     if (typeOfPassword === "password") {
       setIconEye(eye);
@@ -34,8 +32,7 @@ const Register = () => {
     email: "",
     fullname: "",
     password: "",
-    // avatar: "",
-    // coverImage: "",
+    cpassword: "",
   };
 
   const [formData, setFormData] = useState(scafolding);
@@ -53,25 +50,27 @@ const Register = () => {
   // register section
   const handleSubmitRegister = async (e) => {
     e.preventDefault();
-    try {
-      registerUser({ ...formData });
-    } catch (error) {
-      console.log(error);
+    // console.log(formData?.password?.length);
+    if (formData?.cpassword !== formData?.password) {
+      return toast.error("password not match");
+    } else if (
+      formData?.password?.length < 6 &&
+      formData?.cpassword?.length < 6
+    ) {
+      return toast.error("password must be 6 charecter");
     }
+
+    const res = await dispatch(createAccount(formData));
+
+    let result = await res?.payload;
+    setResponse(result);
   };
 
-  if (isError) {
-    console.log(error);
-  }
-  if (isSuccess) {
-    toast.success("user account created successfull");
-
-    // dispatch(setUser(data?.data));
-
-    if (data) {
-      navigate("/");
+  useEffect(() => {
+    if (response) {
+      window.location.reload();
     }
-  }
+  }, [response]);
   return (
     <>
       <TabPanel value="paypal" className="p-0">
@@ -129,7 +128,7 @@ const Register = () => {
             </span>
           </div>
           <Input
-            defaultValue={formData?.password}
+            defaultValue={formData?.cpassword}
             onChange={handleChange}
             type={typeOfPassword}
             color="pink"
@@ -169,7 +168,7 @@ const Register = () => {
             valid information
           </Typography>
         </form>
-        {isError && error?.data}
+        {/* {isError && error?.data} */}
         <div className="flex flex-col items-center gap-4 py-2">
           <Link to={"/"}>
             <Button variant="text" className="flex items-center gap-2">

@@ -5,12 +5,12 @@ const userApi = baseApi.injectEndpoints({
     //query
     getCurrentUser: builder.query({
       query: () => "/api/users/current-user",
-      invalidatesTags: ["Users"],
+      providesTags: ["Users"],
     }),
 
     getUsers: builder.query({
       query: () => "/api/users",
-      invalidatesTags: ["Users"],
+      valid: ["Users"],
     }),
 
     getGenerateToken: builder.query({
