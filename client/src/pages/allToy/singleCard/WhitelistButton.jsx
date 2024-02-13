@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
-import { AuthContext } from "../../../authentication/AuthProvider";
+
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 

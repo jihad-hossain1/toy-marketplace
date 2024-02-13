@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Drawer, Typography, IconButton } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
-import { AuthContext } from "../../authentication/AuthProvider";
+
 import { Badge } from "antd";
 
 import toast, { Toaster } from "react-hot-toast";

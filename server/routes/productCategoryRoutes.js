@@ -7,10 +7,10 @@ const {
 
 const router = express.Router();
 
-router.post("/productCategory", createProductCategory);
+router.route("/productCategory").post(createProductCategory);
 
-router.get("/productCategory", getProductCategories);
+router.route("/productCategory").get(getProductCategories);
 
-router.put("/productCategory/:id", updateProductCategories);
+router.route("/productCategory/:id").put(updateProductCategories);
 
 module.exports = router;

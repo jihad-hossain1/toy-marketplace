@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import NotFoundItem from '../../../../components/notFoundItem/NotFoundItem';
-import { AuthContext } from '../../../../authentication/AuthProvider';
 import SingleCheckoutCard from './SingleCheckoutCard';
 import StepperWithIcon from './StepperWithIcon';
 
@@ -8,9 +7,8 @@ import StepperWithIcon from './StepperWithIcon';
 
 
 const Checkout = () => {
-    const {user} = useContext(AuthContext)
+
     
-      
       
      
     return (

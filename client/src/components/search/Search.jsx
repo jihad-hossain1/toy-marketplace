@@ -1,9 +1,7 @@
-import { Button, Input } from '@material-tailwind/react';
+import { Button, Input } from "@material-tailwind/react";
 import React, { useContext } from "react";
-import { AuthContext } from "../../authentication/AuthProvider";
 
 const Search = () => {
-
   return (
     <>
       <div className="relative flex lg:w-[24rem]">

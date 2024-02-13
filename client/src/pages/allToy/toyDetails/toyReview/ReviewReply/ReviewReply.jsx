@@ -1,6 +1,5 @@
 import { Button, Textarea } from "@material-tailwind/react";
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../../../../../authentication/AuthProvider";
 import toast from "react-hot-toast";
 import { useAddReplyMutation } from "../../../../../redux/features/api/reviewApi";
 import { BsThreeDots } from "react-icons/bs";
@@ -8,8 +7,7 @@ import ReplyAction from "./ReplyAction";
 import { useSelector } from "react-redux";
 
 const ReviewReply = ({ rid, replies, productId }) => {
-  // const { user } = useContext(AuthContext);
-   const user = useSelector((state) => state.auth?.userData);
+  const user = useSelector((state) => state.auth?.userData);
 
   const [content, setcontent] = useState("");
   const [toggle, setToggle] = useState(false);

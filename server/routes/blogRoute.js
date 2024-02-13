@@ -8,12 +8,12 @@ const {
 
 const router = express.Router();
 
-router.get("/blogs", getBlogs);
+router.route("/blogs").get(getBlogs);
 
-router.get("/blogs/:id", getBlogById);
+router.route("/blogs/:id").get(getBlogById);
 
-router.post("/blogs", createBlog);
+router.route("/blogs").post(createBlog);
 
-router.delete("/blogs/:id", deleteBlog);
+router.route("/blogs/:id").delete(deleteBlog);
 
 module.exports = router;

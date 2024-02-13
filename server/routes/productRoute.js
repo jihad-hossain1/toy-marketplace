@@ -11,21 +11,20 @@ const {
 
 const router = express.Router();
 
-router.get("/products", getProducts);
+router.route("/products").get(getProducts);
 
-router.get("/products_page", getProducts_page);
+router.route("/products_page").get(getProducts_page);
 
-router.get("/products/:id", getProductById);
+router.route("/products/:id").get(getProductById);
 
-router.get("/userProducts/:email", getProductByEmail);
+router.route("/userProducts/:email").get(getProductByEmail);
 
-router.post("/products", createProduct);
+router.route("/products").post(createProduct);
 
-router.delete("/products/:id", deleteProductDetailsReview);
+router.route("/products/:id").delete(deleteProductDetailsReview);
 
-router.delete(
-  "/products_email/:id/user/:email",
-  deleteProductDetailsReviewEmail
-);
+router
+  .route("/products_email/:id/user/:email")
+  .delete(deleteProductDetailsReviewEmail);
 
 module.exports = router;

@@ -1,15 +1,13 @@
 import { Button, TabPanel, Textarea } from "@material-tailwind/react";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../../authentication/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { useAddReviewMutation } from "../../../../redux/features/api/reviewApi";
 import FetchAllReview from "./FetchAllReview";
 import { useSelector } from "react-redux";
 
 const ToyReview = ({ pid }) => {
-  // const { user } = useContext(AuthContext);
   const user = useSelector((state) => state.auth?.userData);
-  
+
   const [content, setcontent] = useState("");
 
   const [addReview, { isError, isLoading, data, error }] =

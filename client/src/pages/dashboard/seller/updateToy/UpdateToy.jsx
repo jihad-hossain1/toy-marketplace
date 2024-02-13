@@ -2,7 +2,6 @@ import { PencilIcon } from '@heroicons/react/24/solid';
 import { Button, IconButton, Input, MenuItem, Textarea } from '@material-tailwind/react';
 import React, { useContext, useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { AuthContext } from '../../../../authentication/AuthProvider';
 import { useSelector } from "react-redux";
 
 const UpdateToy = ({ ite }) => {
