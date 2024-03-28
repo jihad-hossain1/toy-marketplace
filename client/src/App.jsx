@@ -25,6 +25,7 @@ import AddToy from "./pages/dashboard/seller/addToy/AddToy";
 import ManageToy from "./pages/dashboard/seller/manageToy/ManageToy";
 import ToyManage from "./pages/dashboard/admin/ToyManage/ToyManage";
 import ManageBlogs from "./pages/dashboard/admin/ManageBlogs/ManageBlogs";
+import AdminProtectRoute from "./router/AdminProtectRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,9 +51,9 @@ function App() {
         <Route
           path="/dashboardAdminOnly"
           element={
-            <ProtectedRoute>
+            <AdminProtectRoute>
               <AdminDashboard />
-            </ProtectedRoute>
+            </AdminProtectRoute>
           }
         >
           <Route path="/dashboardAdminOnly" element={<AdminDashboardHome />} />
