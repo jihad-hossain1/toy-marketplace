@@ -18,7 +18,7 @@ const Search = () => {
       setError(null);
       try {
         const response = await fetch(
-          `http://localhost:9000/api/product-search?search=${search}`
+          `${import.meta.env.VITE_BASE_URL}/api/product-search?search=${search}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
