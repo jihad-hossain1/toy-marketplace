@@ -7,6 +7,7 @@ const {
   getProducts_page,
   deleteProductDetailsReview,
   deleteProductDetailsReviewEmail,
+  productSearch,
 } = require("../controller/productController");
 
 const router = express.Router();
@@ -14,6 +15,8 @@ const router = express.Router();
 router.route("/products").get(getProducts);
 
 router.route("/products_page").get(getProducts_page);
+
+router.route("/product-search").get(productSearch);
 
 router.route("/products/:id").get(getProductById);
 

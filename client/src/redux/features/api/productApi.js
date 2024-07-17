@@ -21,6 +21,11 @@ const productApi = baseApi.injectEndpoints({
       invalidatesTags: ["products"],
     }),
 
+    getProductsByQuery: builder.query({
+      query: (search) => `/api/product-search?search=${search}`,
+      invalidatesTags: ["products"],
+    }),
+
     // all mutation
     addProduct: builder.mutation({
       query: (product) => ({
@@ -58,4 +63,5 @@ export const {
   useGetProductsByPageQuery,
   useDeleteSellerProductMutation,
   useProductDeleteByAdminMutation,
+  useGetProductsByQueryQuery,
 } = productApi;

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Product = require("../models/Product");
 const ProductDetail = require("../models/ProductDetail");
 const Review = require("../models/Review");
-
+const { buildSearchQuery } = require("../utils/search-helpers");
 
 const getProductByEmail = async (req, res) => {
   const email = req.params?.email;
@@ -64,8 +64,6 @@ const createProduct = async (req, res) => {
     res.status(500).json({ error: "you got an server error" });
   }
 };
-
-
 
 const getProducts_page = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -168,6 +166,24 @@ const deleteProductDetailsReviewEmail = async (req, res) => {
   }
 };
 
+// search products
+
+const productSearch = async (req, res) => {
+  const searchTerm = req.query.search || "";
+  const searchFields = ["category", "toyTitle"];
+  const searchQuery = buildSearchQuery(searchTerm, searchFields);
+
+  try {
+    const searchResult = await Product.find(searchQuery).select(
+      "toyTitle image price category _id"
+    );
+
+    res.status(200).json({ result: searchResult });
+  } catch (error) {
+    res.status(500).json({ error: error?.message });
+  }
+};
+
 module.exports = {
   getProducts,
   createProduct,
@@ -176,4 +192,5 @@ module.exports = {
   getProducts_page,
   deleteProductDetailsReview,
   deleteProductDetailsReviewEmail,
+  productSearch,
 };
